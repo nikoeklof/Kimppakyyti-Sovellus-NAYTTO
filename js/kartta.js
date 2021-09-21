@@ -8,11 +8,11 @@ window.onload = () => {
 }
 
 function naytaKoordinaatit(koordinaatit) {
-    let zoom = 13
+    let zoom = 10
     if (navigator.geolocation) {
         kayttajaLat = koordinaatit.coords.latitude
         kayttajaLon = koordinaatit.coords.longitude
-        zoom = 11
+        zoom = 15
     } else {
         kayttajaLat = 60.00
         kayttajaLon = 23.00
@@ -24,10 +24,11 @@ function naytaKoordinaatit(koordinaatit) {
 function luoKartta(lat, lon, zoom) {
     kartta = L.map('kartta', {
         center: [lat, lon],
-        zoom: zoom
+        zoom: zoom,
     })
-    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-
+    L.control.fullscreen().addTo(kartta);
+    
+    var karttaLayer = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
         id: 'mapbox/streets-v11',
@@ -37,4 +38,3 @@ function luoKartta(lat, lon, zoom) {
     }).addTo(kartta)
     
 }
-
