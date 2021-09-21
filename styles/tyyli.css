@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300&display=swap');
 
+
+.leaflet-top {
+    margin-top:55px;
+}
 html,body {
     margin:0;
     padding:0;
@@ -109,6 +113,7 @@ h4 {
     border-bottom: 2px solid black;
     display: none;
     position: sticky;
+    z-index: 9999;
 }
 .navigointilinkit {
     cursor: pointer;
@@ -131,10 +136,14 @@ h4 {
     right:20px;
 }
 #sisalto {
+    position: absolute;
+    top:0;
+    left:0;
     text-align: center;
     display:none;
     margin: 0;
     width:100%;
+    height:100%;
     overflow-x: clip;
 }
 #etsikyytia{
