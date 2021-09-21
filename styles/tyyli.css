@@ -135,13 +135,11 @@ h4 {
     display:none;
     margin: 0;
     width:100%;
-    height: 100%;
     overflow-x: clip;
 }
 #etsikyytia{
     display: none;
     margin: 0;
-    height:100%;
     width:100%;
     background-color: white;
 }

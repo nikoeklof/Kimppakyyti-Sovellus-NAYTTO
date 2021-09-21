@@ -1,8 +1,5 @@
-.kartta {
-    margin: 0;
-    padding: 0;
-    position: absolute;
+#kartta {
+    position:absolute;
     width: 100%;
-    height: 96.6%;
-    z-index: 0;
+    height: 94.6%;
 }

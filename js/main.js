@@ -34,14 +34,14 @@ function suljeError() {
 
 function suljeTausta() {
   document.getElementById("fullscreenkuva").style.display ="none";
-  document.getElementById("sisalto").style.display ="block";
+  document.getElementById("sisalto").style.display ="flex";
   document.getElementById("navigointi").style.display ="block";
   document.getElementById("etsikyytia").style.display ="block";
 }
 
 
 function etsiKyytia() {
-  document.getElementById("etsikyytia").style.display ="block";
+  document.getElementById("etsikyytia").style.display ="flex";
   document.getElementById("tarjoakyytia").style.display ="none";
   document.getElementById("ohjeetsivu").style.display ="none";
 }
