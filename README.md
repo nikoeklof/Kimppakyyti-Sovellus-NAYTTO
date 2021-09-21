@@ -3,4 +3,5 @@ Luodaan Kimppakyyti-sovellus Ohjelmoinnin näytöksi
 
 # Toimintakaavio
 
-![toimintakaaviokimppakyyti](https://user-images.githubusercontent.com/77320275/134124544-8794d4f3-b248-4243-b6cd-9d32ddc7537f.png)
+
+![asd](https://user-images.githubusercontent.com/77320275/134124826-05bea29f-3b50-4f5d-b43f-edd6b96ba13a.png)
