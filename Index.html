@@ -1,41 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/tyyli.css">
+    <link rel="stylesheet" href="styles/kartta.css">
+    <link rel="stylesheet" href="node_modules/leaflet/dist/leaflet.css">
+    <link rel="stylesheet" href="node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.css">
+    <link rel="stylesheet" href="node_modules/leaflet.fullscreen/Control.FullScreen.css">
+    <link rel="stylesheet" href="node_modules/leaflet-control-geocoder/dist/Control.Geocoder.css">
     <title>KimppaKyytiSovellus</title>
 </head>
+
 <body>
     <div class="fullscreenkuva" id="fullscreenkuva">
         <h1 id="etusivuteksti">Kimppis</h1>
         <p id="etusivuslogan">-Tie perille löytyy täältä!-</p>
         <h2 id="jatkalinkki" onclick="suljeTausta()">Jatka sivustolle &rarr;</h2>
         <br>
-      </div>
-      <div class="navigointi" id="navigointi">
-      <a class="navigointilinkit" id="etsi" onclick="etsiKyytia()">Etsi kyytiä</a>
-      <a class="navigointilinkit" id="tarjoa" onclick="tarjoaKyytia()">Tarjoa kyytiä</a>
-      <a class="navigointilinkit" id="ohjeet" onclick="ohjeet()">Ohjeet</a>
-      <p id="kirjautunutkayttaja">Kirjautuneena:</p>
-      </div>
-      
-      
-      <div id="sisalto">
-      <div id="etsikyytia"><br><br><br><p>Tähän kartta</p></div>
-      <div id="tarjoakyytia"><br><br><br><p>Tähän lomake jossa voi luoda uuden matkan</p></div>
-      <div id="ohjeetsivu"><br><br><br><p>Tähän ihan vaan liibalaabaa</p></div>
-      </div>
-      
-      <div id="kirjautuminen">
+    </div>
+    <div class="navigointi" id="navigointi">
+        <a class="navigointilinkit" id="etsi" onclick="etsiKyytia()">Etsi kyytiä</a>
+        <a class="navigointilinkit" id="tarjoa" onclick="tarjoaKyytia()">Tarjoa kyytiä</a>
+        <a class="navigointilinkit" id="ohjeet" onclick="ohjeet()">Ohjeet</a>
+        <p id="kirjautunutkayttaja">Kirjautuneena:</p>
+    </div>
+
+
+    <div id="sisalto">
+        <div id="etsikyytia">
+            <div id="kartta" class="kartta"></div>
+        </div>
+
+
+        <div id="tarjoakyytia"><br><br><br>
+            <p>Tähän lomake jossa voi luoda uuden matkan</p>
+        </div>
+        <div id="ohjeetsivu"><br><br><br>
+            <p>Tähän ihan vaan liibalaabaa</p>
+        </div>
+    </div>
+
+    <div id="kirjautuminen">
         <p>Käyttäjätunnus:</p><input type="text" id="kayttajanimi">
         <br>
         <p>Salasana:</p><input type="text" id="salasana">
         <br>
         <button id="kirjauduBtn" onclick="kirjaudu()">Kirjaudu sisään</button>
-      </div>
+    </div>
 
-<script src="js/main.js"></script>   
+    <script src="js/main.js"></script>
+    <script src="node_modules/leaflet/dist/leaflet.js" defer></script>
+    <script src="node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.js" defer></script>
+    <script src="node_modules/leaflet-control-geocoder/dist/Control.Geocoder.js" defer></script>
+    <script src="node_modules/leaflet.fullscreen/Control.FullScreen.js" defer></script>
+    <script src="js/kartta.js" defer></script>
 </body>
+
 </html>

@@ -1,6 +1,9 @@
 
-
-
+  document.getElementById("fullscreenkuva").style.display ="none";
+  document.getElementById("kirjautuminen").style.display ="none";
+  document.getElementById("sisalto").style.display ="block";
+  document.getElementById("navigointi").style.display ="block";
+  document.getElementById("etsikyytia").style.display ="inline-block";
 function suljeTausta() {
   document.getElementById("fullscreenkuva").style.display ="none";
   document.getElementById("kirjautuminen").style.display ="block";
