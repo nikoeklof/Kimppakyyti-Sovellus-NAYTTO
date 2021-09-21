@@ -7,7 +7,6 @@ html,body {
     height:100%;
     background-color: rgb(255, 1, 1);
 }
-
 #fullscreenkuva{
     display: none;
     height: 100vh;
@@ -19,10 +18,6 @@ html,body {
     background-size: cover;
     z-index:99; 
  }
-
-#fullscreenkuva p { 
-    color:white;
-}
 p {
     font-family: 'Lobster', cursive;
 }
@@ -80,7 +75,6 @@ h4 {
       cursor: pointer;
       color: yellow;
 }
-
 #kirjautuminen {
     text-align: center;
     width:300px;
@@ -90,7 +84,6 @@ h4 {
     -moz-box-shadow: 0px 0px 16px 2px rgba(49,49,49,1);
     box-shadow: 0px 0px 16px 2px rgba(49,49,49,1);
 }
-
 #kirjautuminen input {
     font-size: 1.3em;
     background-color: rgb(49, 49, 49,0.5);
@@ -99,7 +92,6 @@ h4 {
     height:40px;
     border-radius: 20px;
 }
-
 #kirjautuminenError {
     display:none;
     text-align: center;
@@ -110,7 +102,6 @@ h4 {
     -moz-box-shadow: 0px 0px 16px 2px rgba(49,49,49,1);
     box-shadow: 0px 0px 16px 2px rgba(49,49,49,1);
 }
-
 .navigointi {
     width:100%;
     height:50px;
@@ -146,7 +137,6 @@ h4 {
     width:100%;
     height: 100%;
 }
-
 #etsikyytia{
     display: none;
     margin: 0;
