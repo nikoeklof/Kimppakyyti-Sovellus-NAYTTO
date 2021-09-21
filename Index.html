@@ -26,9 +26,9 @@
           <h4>-Tie perille löytyy täältä!-</h4>
          <input type="text" placeholder="Käyttäjätunnus" id="kayttajanimi"> <input type="text" placeholder="Salasana" id="salasana">
           
-          <h2 id="kirjaudulinkki"  onclick="kirjaudu()">Kirjaudu sisään</h2>
+          <h2 id="kirjaudulinkki"  onclick="kirjaudu(), kartta.invalidateSize()">Kirjaudu sisään</h2>
         </div>
-        <h2 id="jatkalinkki" onclick="suljeTausta()">Jatka kirjautumatta &rarr;</h2>
+        <h2 id="jatkalinkki" onclick="suljeTausta(), kartta.invalidateSize()">Jatka kirjautumatta &rarr;</h2>
         <br>
       </div>
 
