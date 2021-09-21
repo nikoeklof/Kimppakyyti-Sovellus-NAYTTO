@@ -23,7 +23,9 @@ html,body {
 #fullscreenkuva p { 
     color:white;
 }
-
+p {
+    font-family: 'Lobster', cursive;
+}
 h1 {
     font-family: 'Lobster', cursive;
     color:white;
@@ -37,22 +39,26 @@ h3 {
     font-size: 2em;
     color:white;
 }
+h4 {
+    font-family: 'Mulish', sans-serif;
+    font-size: 1em;
+    color:white;
+    margin-left:5px;
+    margin-top: 60px;
+    margin-bottom: 30px;
+}
 #etusivuteksti {
-    font-size: 10em;
+    margin:0;
+    margin-top: 50px;
+    font-size: 5em;
     text-shadow: 10px 5px black, 5px 10px rgb(49, 49, 49);
 }
-
-#etusivuslogan {
-    font-size: 3em;
-    line-height: 0;
-}
-
 #jatkalinkki {
   cursor: pointer;
   color:rgb(255, 255, 255);
   position: absolute;
-  font-size: 3em;
-  letter-spacing: 4px;
+  font-size: 1.5em;
+  letter-spacing: 3px;
   bottom:20px;
   right:100px;
   text-shadow: 4px 4px black, -2px -2px rgb(49, 49, 49);
@@ -61,63 +67,50 @@ h3 {
     cursor: pointer;
     color: yellow;
 }
-p {
-    font-family: 'Lobster', cursive;
-}
-
-.footer {
-    border-top:2px solid black;
-    position: absolute;
-    bottom:-82px;
-    width:100%;
-    height:80px;
+#kirjaudulinkki {
     text-align: center;
-    background-color: rgb(49, 49, 49);
+    margin-right: 5px;
+    cursor: pointer;
+    color:rgb(255, 255, 255);  
+    font-size: 1.5em;
+    letter-spacing: 2px;
+    text-shadow: 4px 4px black, -2px -2px rgb(49, 49, 49);
 }
-.footer p {
-    color:white;
+#kirjaudulinkki:hover {
+      cursor: pointer;
+      color: yellow;
 }
 
 #kirjautuminen {
-    display: none;
-    width:205px;
-    height:172px;
-    background-color:rgb(49, 49, 49);
-    border-left: 2px solid black;
-    border-bottom: 2px solid black;
-    position:fixed;
-    top:0;
-    right:0;
-    border-bottom-left-radius: 10px;
+    text-align: center;
+    width:300px;
+    background-color:rgb(49, 49, 49,0.5);
+    border-radius: 10px;
     -webkit-box-shadow: 0px 0px 16px 2px rgba(49,49,49,1);
     -moz-box-shadow: 0px 0px 16px 2px rgba(49,49,49,1);
     box-shadow: 0px 0px 16px 2px rgba(49,49,49,1);
 }
-#kirjautuminen p {
-    margin-left: 10px;
-    color:white;
-    line-height: 0;
-    font-family: 'Mulish', sans-serif;
-}
+
 #kirjautuminen input {
-    border-radius: 5px;
-    margin-left: 10px;
-    height:20px;
+    font-size: 1.3em;
+    background-color: rgb(49, 49, 49,0.5);
+    width:200px;
+    margin-top:10px;
+    height:40px;
+    border-radius: 20px;
 }
-#kirjauduBtn {
-    cursor: pointer;
-    background-color: rgb(255, 255, 255);
-    color: rgb(49, 49, 49);
+
+#kirjautuminenError {
+    display:none;
     text-align: center;
-    display: inline-block;
-    margin-top:20px;
-    margin-left: 10px;
-    font-size: 15px;
-    padding: 5px 35px;
-    border:2px solid grey;
-    border-top:1px solid grey;
-    border-radius: 5px;
+    width:300px;
+    background-color:rgb(49, 49, 49,0.5);
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 16px 2px rgba(49,49,49,1);
+    -moz-box-shadow: 0px 0px 16px 2px rgba(49,49,49,1);
+    box-shadow: 0px 0px 16px 2px rgba(49,49,49,1);
 }
+
 .navigointi {
     width:100%;
     height:50px;
@@ -174,22 +167,4 @@ p {
     height:100%;
     width:100%;
     background-color: white;
-}
-#jokulinkki {
-    display: none;
-    margin: 0 auto;
-    height:100%;
-    width:996px;
-    background-color: white;
-    border-left: 2px solid black;
-    border-right: 2px solid black;
-}
-
-#mapid { 
-    height: 400px; 
-    width:100%;
-}
-
-.leaflet-right {
-    display: none;
 }
