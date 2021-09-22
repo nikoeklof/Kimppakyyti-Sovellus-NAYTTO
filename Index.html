@@ -46,7 +46,16 @@
        <div id="etsikyytia">
             <div id="kartta" class="kartta"></div>
         </div>
-      <div id="tarjoakyytia"><br><br><br><p>Tähän lomake jossa voi luoda uuden matkan</p></div>
+      <div id="tarjoakyytia">
+          <div id="kyytilomake">
+            <h2>Luo reitti ja tarjoa kyytiä</h2>
+            <label for="lahtopaikka">Lähtöpaikka: </label>
+            <input type="text" id="lahtopaikka">
+            <label for="maaranpaa">Määränpää: </label>
+            <input type="text" id="maaranpaa">
+            <button id="luokyyti" onclick="luoKyyti(document.getElementById('lahtopaikka').value, document.getElementById('maaranpaa').value)">Luo kyyti</button>
+          </div>
+      </p></div>
       <div id="ohjeetsivu"><br><br><br><p>Tähän ihan vaan liibalaabaa</p></div>
       </div>
       
@@ -57,6 +66,6 @@
     <script src="node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.js" ></script>
     <script src="node_modules/leaflet-control-geocoder/dist/Control.Geocoder.js" ></script>
     <script src="node_modules/leaflet.fullscreen/Control.FullScreen.js"></script>
-    <script src="js/kartta.js" ></script>
+    <script src="js/kartta.js"></script>
 </body>
 </html>
