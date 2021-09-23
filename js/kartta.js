@@ -57,20 +57,28 @@ kartta.on('click', (e) => {
     console.log(klikkicoordinaatit.lat, klikkicoordinaatit.lng)
 })
 
-function luoKyyti(lahto, maaranpaa) {
+function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara) {
 
     if (reittiID == undefined) {
         reittiID = 0
     }
     reitti.push({
         id: reittiID,
+        kayttajanimi: kayttajanimi,
+        paivamaara: paivamaara,
         router: L.Routing.control({
             show: false,
             geocoder: L.Control.Geocoder.nominatim(),
-            routeWhileDragging: false
-
+            routeWhileDragging: false,
+            addWaypoints: false
         }).addTo(kartta)
+        
+
     })
+    if (reitti[reittiID].kayttajanimi == undefined && reitti[reittiID].paivamaara == undefined) {
+        reitti[reittiID].kayttajanimi = ""
+        reitti[reittiID].paivamaara = ""
+    }
     let koordinaatit = [];
     var httpRequestlahto = new XMLHttpRequest()
     httpRequestlahto.onload = () => {
@@ -79,7 +87,6 @@ function luoKyyti(lahto, maaranpaa) {
         koordinaatit.push({ lat: jsonDatalahto[0].lat, lng: jsonDatalahto[0].lon })
 
     }
-
 
     httpRequestlahto.open('GET', 'https://nominatim.openstreetmap.org/search?city=' + lahto + '&format=json')
     httpRequestlahto.send()
