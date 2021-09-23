@@ -1,5 +1,6 @@
 var kayttajaLat;
 var kayttajaLon;
+var tallennetutReitit = [];
 var reitti = [];
 var reittiID;
 var kartta = L.map('kartta', {
@@ -10,10 +11,17 @@ var kartta = L.map('kartta', {
 
 
 window.onload = () => {
-    // if (reitti.length == 0 && localStorage.getItem("reitit") != null) {
-    //     continue
+    if (reitti.length == 0 && localStorage.getItem("reitit") != null) {
+        var data = localStorage.getItem("reitit")
+        console.log(data)
+        for (let i = 0; i < data.length; i++) {
+            console.log(data[i])
+            let parsed = JSON.parse(data[i])
+            tallennetutReitit.push(parsed)
+        }
+        console.log(tallennetutReitit)
 
-    // }
+    }
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(naytaKoordinaatit)
@@ -43,9 +51,9 @@ function luoKartta(lat, lon, zoom) {
 
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-	maxZoom: 19,
-	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(kartta)
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(kartta)
 
 }
 kartta.on('click', (e) => {
@@ -113,18 +121,16 @@ function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara) {
     console.log([lahto, maaranpaa])
     reitti[reittiID].router.setWaypoints([L.latLng(lahto[0].lat, lahto[0].lon), L.latLng(maaranpaa[0].lat, maaranpaa[0].lon)])
     console.log(reitti[reittiID].router.getWaypoints())
-        // let string = JSON.stringify({
-        //     id: reitti[reittiID].id, 
-        //     kayttajanimi: reitti[reittiID].kayttajanimi, 
-        //     paivamaara: reitti[reittiID].paivamaara,
-        //     router: i = reitti[reittiID].router
-
-    // })
-    // var circ = {}
-    // circ.circ = circ;
-    // var cache = [];
-
-    // JSON.stringify(circ, (key, value))
-    // console.log(JSON.parse(string))
+    let string ={ reittiID:  + reittiID.toString()} + JSON.stringify({
+            kayttajanimi: reitti[reittiID].kayttajanimi,
+            paivamaara: reitti[reittiID].paivamaara,
+            router: [reitti[reittiID].router.getWaypoints()[0].latLng, reitti[reittiID].router.getWaypoints()[1].latLng]
+        })
+    console.log(string)
+    var parsedString = JSON.parse(string)
+    console.log(parsedString)
+    // tallennetutReitit.push(string)
+    // localStorage.setItem("reitit", tallennetutReitit)
+    // console.log(tallennetutReitit)
 
 }
