@@ -5,14 +5,15 @@ var reittiID;
 var kartta = L.map('kartta', {
     center: [0, 0],
     zoom: 13,
-    waypoints: [],
-    geocoder: "nominatim"
-
 
 });
 
 
 window.onload = () => {
+    // if (reitti.length == 0 && localStorage.getItem("reitit") != null) {
+    //     continue
+
+    // }
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(naytaKoordinaatit)
@@ -41,14 +42,10 @@ function luoKartta(lat, lon, zoom) {
     L.control.fullscreen().addTo(kartta);
 
 
-    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom: 18,
-        id: 'mapbox/streets-v11',
-        tileSize: 512,
-        zoomOffset: -1,
-        accessToken: 'pk.eyJ1IjoiYm9vdHRlZCIsImEiOiJja3RpYTh3MXQwenNzMm9udW5xOTRnOWMyIn0.YtJp-pc0wb_EoFBrZ-GHzQ'
-    }).addTo(kartta)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	maxZoom: 19,
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(kartta)
 
 }
 kartta.on('click', (e) => {
@@ -58,31 +55,14 @@ kartta.on('click', (e) => {
 })
 
 function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara) {
+    var jsonDatalahto;
+    var jsonDatamaaranpaa;
 
-    if (reittiID == undefined) {
-        reittiID = 0
-    }
-    reitti.push({
-        id: reittiID,
-        kayttajanimi: kayttajanimi,
-        paivamaara: paivamaara,
-        router: L.Routing.control({
-            show: false,
-            geocoder: L.Control.Geocoder.nominatim(),
-            routeWhileDragging: false,
-            addWaypoints: false
-        }).addTo(kartta)
-        
 
-    })
-    if (reitti[reittiID].kayttajanimi == undefined && reitti[reittiID].paivamaara == undefined) {
-        reitti[reittiID].kayttajanimi = ""
-        reitti[reittiID].paivamaara = ""
-    }
     let koordinaatit = [];
     var httpRequestlahto = new XMLHttpRequest()
     httpRequestlahto.onload = () => {
-        var jsonDatalahto = JSON.parse(httpRequestlahto.responseText)
+        jsonDatalahto = JSON.parse(httpRequestlahto.responseText)
 
         koordinaatit.push({ lat: jsonDatalahto[0].lat, lng: jsonDatalahto[0].lon })
 
@@ -93,9 +73,11 @@ function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara) {
 
     var httpRequestmaaranpaa = new XMLHttpRequest()
     httpRequestmaaranpaa.onload = () => {
-        var jsonDatamaaranpaa = JSON.parse(httpRequestmaaranpaa.responseText)
+        jsonDatamaaranpaa = JSON.parse(httpRequestmaaranpaa.responseText)
         koordinaatit.push({ lat: jsonDatamaaranpaa[0].lat, lng: jsonDatamaaranpaa[0].lon })
-        luoReitti(reittiID, koordinaatit)
+        console.log(jsonDatamaaranpaa)
+
+        luoReitti(jsonDatalahto, jsonDatamaaranpaa, kayttajanimi, paivamaara)
         reittiID = reittiID + 1
 
     }
@@ -106,8 +88,43 @@ function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara) {
 
 }
 
-function luoReitti(reittiObjekti, koordinaatit) {
 
-    reitti[reittiObjekti].router.setWaypoints([koordinaatit[0], koordinaatit[1]])
-    console.log(reitti[reittiObjekti].router.getWaypoints())
+function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara) {
+    if (kayttajanimi == null && paivamaara == null) {
+        kayttajanimi = ""
+        paivamaara = ""
+    }
+    if (reittiID == undefined) {
+        reittiID = 0
+
+    }
+    reitti.push({
+        id: reittiID,
+        kayttajanimi: kayttajanimi,
+        paivamaara: paivamaara,
+        router: L.Routing.control({
+            show: false,
+            geocoder: L.Control.Geocoder.nominatim(),
+            routeWhileDragging: false,
+            addWaypoints: false,
+            createMarker: function(i = 0, wp, nWps) { return L.marker(wp.latLng).bindPopup('Reitin Alku: ' + lahto[0].display_name.split(",")[0] + '<br> Reitti päättyy: ' + maaranpaa[0].display_name.split(",")[0]); }
+        }).addTo(kartta)
+    })
+    console.log([lahto, maaranpaa])
+    reitti[reittiID].router.setWaypoints([L.latLng(lahto[0].lat, lahto[0].lon), L.latLng(maaranpaa[0].lat, maaranpaa[0].lon)])
+    console.log(reitti[reittiID].router.getWaypoints())
+        // let string = JSON.stringify({
+        //     id: reitti[reittiID].id, 
+        //     kayttajanimi: reitti[reittiID].kayttajanimi, 
+        //     paivamaara: reitti[reittiID].paivamaara,
+        //     router: i = reitti[reittiID].router
+
+    // })
+    // var circ = {}
+    // circ.circ = circ;
+    // var cache = [];
+
+    // JSON.stringify(circ, (key, value))
+    // console.log(JSON.parse(string))
+
 }
