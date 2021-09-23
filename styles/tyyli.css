@@ -5,6 +5,9 @@
 .leaflet-top {
     margin-top:55px;
 }
+.leaflet-right {
+    display:none;
+}
 html,body {
     margin:0;
     padding:0;
@@ -23,7 +26,7 @@ html,body {
     z-index:99; 
  }
 p {
-    font-family: 'Lobster', cursive;
+    font-family: 'Mulish', sans-serif;
 }
 h1 {
     font-family: 'Lobster', cursive;
@@ -51,7 +54,28 @@ h4 {
     margin-top: 50px;
     font-size: 5em;
     text-shadow: 10px 5px black, 5px 10px rgb(49, 49, 49);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
+#banneriteksti {
+    text-align: left;
+    margin:0;
+    margin-left:30px;
+    padding-top: 36px;
+    font-size: 3em;
+    text-shadow: 10px 5px black, 5px 10px rgb(49, 49, 49);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 #jatkalinkki {
   cursor: pointer;
   color:rgb(255, 255, 255);
@@ -128,13 +152,7 @@ h4 {
 .navigointilinkit:first-child {
     margin-left: 50px;
 }
-#kirjautunutkayttaja {
-    display: none;
-    color:white;
-    position: absolute;
-    top:10px;
-    right:20px;
-}
+
 #sisalto {
     position: absolute;
     top:0;
@@ -152,28 +170,188 @@ h4 {
     width:100%;
     background-color: white;
 }
-#tarjoakyytia{
-    display: none;
-    margin: 0 auto;
-    height:100%;
-    width:100%;
-    background-color: white;
-}
+
 #kyytilomake{
+    display:none;
+    width:220px;
+    max-width:220px;
+    background-color: aqua;
     margin: inherit;
     position: relative;
     text-align: center;
-    width: 300px;
-    height: 500px;
-    top: 20%;
+    background-color:white;
+    position: absolute;
+    z-index:999999;
+    padding:5px;
+    top:95px;
+    right:22px;
+    border: 1px solid rgb(49, 49, 49,0.5);
+    border-radius: 4px;
+    border-top-right-radius: 0px;
 }
 #kyytilomake input, label{
     margin: 10px auto;
 }
-#ohjeetsivu {
-    display: none;
-    margin: 0 auto;
-    height:100%;
-    width:100%;
+
+
+
+#info {
+    display:none;
+    width:220px;
+    max-width:220px;
+    padding-right: 1000px;
+    background-color:white;
+    position: absolute;
+    z-index:999999;
+    padding:5px;
+    top:95px;
+    right:22px;
+    border: 1px solid rgb(49, 49, 49,0.5);
+    border-radius: 4px;
+    border-top-right-radius: 0px;
+}
+#profiili {
+    text-align:center;
+    display:none;
+    width:220px;
+    max-width:220px;
+    background-color:white;
+    position: absolute;
+    z-index:999999;
+    padding:5px;
+    top:95px;
+    right:22px;
+    border: 1px solid rgb(49, 49, 49,0.5);
+    border-radius: 4px;
+    border-top-right-radius: 0px;
+}
+
+
+#paivamaarahakupohja {
+    display:none;
+    width:220px;
+    max-width:220px;
+    background-color:white;
+    position: absolute;
+    z-index:999999;
+    padding:5px;
+    top:95px;
+    right:22px;
+    border: 1px solid rgb(49, 49, 49,0.5);
+    border-radius: 4px;
+    border-top-right-radius: 0px;
+}
+.hakunapit {
+    margin-top:5px;
+    margin-left: 5px;
+}
+#suljeMenu {
+    margin-top:-3px;
+    margin-right:-3px;
+    float:right;
+}
+#avaaHaku {
+    margin-left:-5px;
+    margin-top:-4px;
+    font-size: 1.5em;
+    border:none;
     background-color: white;
+}
+#avaaLuonti {
+    margin-top:-5px;
+    font-size: 1.7em;
+    border:none;
+    background-color: white;
+}
+#avaaInfo {
+    margin-top:-4px;
+    font-size: 1.8em;
+    border:none;
+    background-color: white;
+}
+#avaaProfiili {
+    margin-left:-8px;
+    margin-top:-5px;
+    font-size: 1.9em;
+    border:none;
+    background-color: white;
+}
+#avaapaivamaarahaku {
+    height:20px;
+    width:20px;
+    background-color:white;
+    position: absolute;
+    z-index:999999;
+    padding:5px;
+    top:65px;
+    right:115px;
+    border: 1px solid rgb(49, 49, 49,0.5);
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    overflow: hidden;
+}
+#avaakyydinluonti {
+    height:20px;
+    width:20px;
+    background-color:white;
+    position: absolute;
+    z-index:999999;
+    padding:5px;
+    top:65px;
+    right:84px;
+    border: 1px solid rgb(49, 49, 49,0.5);
+    overflow: hidden;
+}
+#avaainfosivu{
+    height:20px;
+    width:20px;
+    background-color:white;
+    position: absolute;
+    z-index:999999;
+    padding:5px;
+    top:65px;
+    right:22px;
+    border: 1px solid rgb(49, 49, 49,0.5);
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    overflow: hidden;
+}
+#avaaprofiilikuvake {
+    height:20px;
+    width:20px;
+    background-color:white;
+    position: absolute;
+    z-index:999999;
+    padding:5px;
+    top:65px;
+    right:53px;
+    border: 1px solid rgb(49, 49, 49,0.5);
+    border-radius: 0;
+    overflow: hidden;
+}
+.kirjautuminenbanneri {
+    position: absolute;
+    top:0;
+    right:0;
+}
+.kirjautuminenbanneri p {
+    font-weight: 600;
+    letter-spacing: 3px;
+    cursor:pointer;
+    font-size: 0.8em;
+    margin:0;
+    color:white;
+    margin-right:10px;
+    margin-top:5px;
+}
+.banneriKirjautuminenTeksti:hover {
+    color:yellow;
+}
+#ulosbanneri {
+    display:none;
+}
+
+#profiilikuva {
+    width:160px;
+    height:160px;
 }
