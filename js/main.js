@@ -1,6 +1,6 @@
 var kayttajatunnus;
 var toggle = 0;
-
+var kirjautunut;
 function kirjaudu() {
   var kayttajanimi = document.getElementById("kayttajanimi").value;
   var salasana = document.getElementById("salasana").value;
@@ -14,6 +14,7 @@ function kirjaudu() {
   for (var i=0; i <tunnusArray.length; i++) {
       if ((kayttajanimi == tunnusArray[i]) && (salasana == salasanaArray[i])) {
           osuma = i;
+          kirjautunut = nimiArray[i]
           break;
       }
   }
