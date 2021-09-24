@@ -6,7 +6,7 @@ var reittiID;
 var kartta = L.map('kartta', {
     center: [0, 0],
     zoom: 13,
-
+    
 });
 
 
@@ -39,7 +39,9 @@ function lataaKyydit() {
                 geocoder: L.Control.Geocoder.nominatim(),
                 routeWhileDragging: false,
                 addWaypoints: false,
+                
                 waypoints: [reittiJSON[i].routerWaypoints[0], reittiJSON[i].routerWaypoints[1]],
+                
                 createMarker: function(x, wp, nWps) {
                     return L.marker(wp.latLng).bindPopup(
                         'Reitin luoja: ' + reittiJSON[i].kayttajanimi + '<br>' +
@@ -51,9 +53,10 @@ function lataaKyydit() {
         })
 
     }
-    
-    kartta.invalidateSize()
-    
+    setTimeout(resetKarttaView, 1500)
+}
+function resetKarttaView(){
+    kartta.setView(L.latLng(63.34,25.98), 6)   
 }
 
 function naytaKoordinaatit(koordinaatit) {
@@ -75,11 +78,8 @@ function luoKartta(lat, lon, zoom) {
     kartta.setView(L.latLng(lat, lon))
     kartta.setZoom(zoom)
     L.control.fullscreen().addTo(kartta);
-
-
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
-
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(kartta)
 
