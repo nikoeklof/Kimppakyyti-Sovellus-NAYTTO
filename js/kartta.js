@@ -11,13 +11,13 @@ var kartta = L.map('kartta', {
 
 
 window.onload = () => {
-    
+
     if (localStorage.getItem("tallennetutReitit") != null) {
         reittiJSON = JSON.parse(localStorage.getItem("tallennetutReitit"))
         console.log(reittiJSON)
-        
+
         lataaKyydit()
-        
+
     }
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(naytaKoordinaatit)
@@ -35,6 +35,7 @@ function lataaKyydit() {
             lahto: reittiJSON[i].lahto,
             maaranpaa: reittiJSON[i].maaranpaa,
             router: L.Routing.control({
+                serviceUrl: "router.project-osrm.org",
                 show: false,
                 geocoder: L.Control.Geocoder.nominatim(),
                 routeWhileDragging: false,
@@ -51,9 +52,9 @@ function lataaKyydit() {
         })
 
     }
-    
+
     kartta.invalidateSize()
-    
+
 }
 
 function naytaKoordinaatit(koordinaatit) {
@@ -97,27 +98,32 @@ function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara, lahtoAika) {
 
     let koordinaatit = [];
     var httpRequestlahto = new XMLHttpRequest()
+    console.log("eka")
     httpRequestlahto.onload = () => {
+        
         jsonDatalahto = JSON.parse(httpRequestlahto.responseText)
 
         koordinaatit.push({ lat: jsonDatalahto[0].lat, lng: jsonDatalahto[0].lon })
-
+        
     }
 
     httpRequestlahto.open('GET', 'https://nominatim.openstreetmap.org/search?city=' + lahto + '&format=json')
     httpRequestlahto.send()
-
-    var httpRequestmaaranpaa = new XMLHttpRequest()
-    httpRequestmaaranpaa.onload = () => {
+    setTimeout(() => {
+        console.log("toka")
+        var httpRequestmaaranpaa = new XMLHttpRequest()
+        httpRequestmaaranpaa.onload = () => {
         jsonDatamaaranpaa = JSON.parse(httpRequestmaaranpaa.responseText)
         koordinaatit.push({ lat: jsonDatamaaranpaa[0].lat, lng: jsonDatamaaranpaa[0].lon })
         luoReitti(jsonDatalahto, jsonDatamaaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAika)
 
+            
+        }
 
-    }
+        httpRequestmaaranpaa.open('GET', 'https://nominatim.openstreetmap.org/search?city=' + maaranpaa + '&format=json')
+        httpRequestmaaranpaa.send()
+    }, 3000)
 
-    httpRequestmaaranpaa.open('GET', 'https://nominatim.openstreetmap.org/search?city=' + maaranpaa + '&format=json')
-    httpRequestmaaranpaa.send()
 }
 
 
@@ -139,6 +145,7 @@ function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAi
         lahto: lahto[0].display_name.split(",")[0],
         maaranpaa: maaranpaa[0].display_name.split(",")[0],
         router: L.Routing.control({
+            serviceUrl: "router.project-osrm.org",
             show: false,
             geocoder: L.Control.Geocoder.nominatim(),
             routeWhileDragging: false,
