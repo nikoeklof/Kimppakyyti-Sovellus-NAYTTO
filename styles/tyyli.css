@@ -80,10 +80,10 @@ h4 {
   cursor: pointer;
   color:rgb(255, 255, 255);
   position: absolute;
-  font-size: 1.5em;
-  letter-spacing: 3px;
+  font-size: 1.3em;
+  letter-spacing: 1.7px;
   bottom:20px;
-  right:100px;
+  right:65px;
   text-shadow: 4px 4px black, -2px -2px rgb(49, 49, 49);
 }
 #jatkalinkki:hover {
