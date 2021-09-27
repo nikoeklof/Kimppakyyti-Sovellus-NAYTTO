@@ -21,6 +21,8 @@ function kirjaudu() {
   if (osuma != -1) {
       kayttajatunnus=document.getElementById("kayttajanimi").value;
       suljeTausta();
+      document.getElementById("sisaankirjautuminenprofiili").style.display="none";
+      document.getElementById("uloskirjautuminenprofiili").style.display="block";
       document.getElementById("sisaanbanneri").style.display="none";
       document.getElementById("ulosbanneri").style.display="block";
       document.getElementById("kirjautunutkayttaja").innerHTML = nimiArray[osuma];
@@ -51,39 +53,53 @@ function suljeMenu() {
   document.getElementById("info").style.display="none";
   document.getElementById("profiili").style.display="none";
   document.getElementById("avaaprofiilikuvake").style.backgroundColor = "white";
-  document.getElementById("avaaProfiili").style.backgroundColor = "white";
-  document.getElementById("profiili").style.display="none";
   document.getElementById("avaapaivamaarahaku").style.backgroundColor = "white";
-  document.getElementById("avaaHaku").style.backgroundColor = "white";
-  document.getElementById("avaaLuonti").style.backgroundColor = "white";
   document.getElementById("avaakyydinluonti").style.backgroundColor = "white";
-  document.getElementById("avaaInfo").style.backgroundColor = "white";
   document.getElementById("avaainfosivu").style.backgroundColor = "white";
 }
 
 function avaaHaku() {
-  suljeMenu();
+ 
+ if (document.getElementById("paivamaarahakupohja").style.display !== "block") {
+   suljeMenu();
   document.getElementById("paivamaarahakupohja").style.display="block";
-  document.getElementById("avaaHaku").style.backgroundColor = "grey";
-  document.getElementById("avaapaivamaarahaku").style.backgroundColor = "grey";
+  document.getElementById("avaapaivamaarahaku").style.backgroundColor = "#d4c2c1";
+} else {
+  document.getElementById("paivamaarahakupohja").style.display="none";
+  document.getElementById("avaapaivamaarahaku").style.backgroundColor = "white";
+  }
 }
+
 function avaaProfiili() {
-  suljeMenu();
-  document.getElementById("profiili").style.display="block";
-  document.getElementById("avaaprofiilikuvake").style.backgroundColor = "grey";
-  document.getElementById("avaaProfiili").style.backgroundColor = "grey";
-}
+  if (document.getElementById("profiili").style.display !== "block") {
+    suljeMenu();
+    document.getElementById("profiili").style.display="block";
+    document.getElementById("avaaprofiilikuvake").style.backgroundColor = "#d4c2c1";
+ } else {
+   document.getElementById("profiili").style.display="none";
+   document.getElementById("avaaprofiilikuvake").style.backgroundColor = "white";
+   }
+ }
+
 function avaakyydinluonti() {
-  suljeMenu();
-  document.getElementById("kyytilomake").style.display="block";
-  document.getElementById("avaaLuonti").style.backgroundColor = "grey";
-  document.getElementById("avaakyydinluonti").style.backgroundColor = "grey";
+  if (document.getElementById("kyytilomake").style.display !== "block") {
+    suljeMenu();
+    document.getElementById("kyytilomake").style.display="block";
+    document.getElementById("avaakyydinluonti").style.backgroundColor = "#d4c2c1";
+  } else {  
+  document.getElementById("kyytilomake").style.display="none";
+  document.getElementById("avaakyydinluonti").style.backgroundColor = "white";
+  }
 }
 function avaaInfo(){
-  suljeMenu();
-  document.getElementById("info").style.display="block";
-  document.getElementById("avaaInfo").style.backgroundColor = "grey";
-  document.getElementById("avaainfosivu").style.backgroundColor = "grey";
+  if (document.getElementById("info").style.display !== "block") {
+    suljeMenu();
+    document.getElementById("info").style.display="block";
+    document.getElementById("avaainfosivu").style.backgroundColor = "#d4c2c1";
+  } else {
+    document.getElementById("info").style.display="none";
+    document.getElementById("avaainfosivu").style.backgroundColor = "white";
+  }
 }
 
 function kirjauduUlos() {
@@ -92,6 +108,8 @@ function kirjauduUlos() {
     document.getElementById("kirjautunutkayttaja").style.display ="none";
     document.getElementById("kirjautunutkayttaja").innerHTML = "Et ole kirjautuneena sisään";
     document.getElementById("yhteystieto").innerHTML = "";
+    document.getElementById("sisaankirjautuminenprofiili").style.display="block";
+    document.getElementById("uloskirjautuminenprofiili").style.display="none";
     location.reload();
 }
 

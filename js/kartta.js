@@ -6,7 +6,7 @@ var reittiID;
 var kartta = L.map('kartta', {
     center: [0, 0],
     zoom: 13,
-    layers: reitti
+    
 });
 var lineLayers = []
 kartta.addHandler
@@ -39,6 +39,7 @@ function lataaKyydit() {
                 geocoder: L.Control.Geocoder.nominatim(),
                 routeWhileDragging: false,
                 addWaypoints: false,
+                
                 waypoints: [reittiJSON[i].routerWaypoints[0], reittiJSON[i].routerWaypoints[1]],
                 lineOptions: {
                     styles: [{ color: "red", opacity: 0.7, weight: 7 }],
@@ -79,11 +80,8 @@ function luoKartta(lat, lon, zoom) {
     kartta.setView(L.latLng(lat, lon))
     kartta.setZoom(zoom)
     L.control.fullscreen().addTo(kartta);
-
-
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
-
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(kartta)
 
