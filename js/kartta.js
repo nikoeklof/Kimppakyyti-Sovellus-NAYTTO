@@ -6,10 +6,10 @@ var reittiID;
 var kartta = L.map('kartta', {
     center: [0, 0],
     zoom: 13,
-
+    layers: reitti
 });
-
-
+var lineLayers = []
+kartta.addHandler
 window.onload = () => {
 
     // if (localStorage.getItem("tallennetutReitit") != null) {
@@ -40,12 +40,16 @@ function lataaKyydit() {
                 routeWhileDragging: false,
                 addWaypoints: false,
                 waypoints: [reittiJSON[i].routerWaypoints[0], reittiJSON[i].routerWaypoints[1]],
+                lineOptions: {
+                    styles: [{ color: "red", opacity: 0.7, weight: 7 }],
+                },
                 createMarker: function(x, wp, nWps) {
                     return L.marker(wp.latLng).bindPopup(
                         'Reitin luoja: ' + reittiJSON[i].kayttajanimi + '<br>' +
                         'Reitin Alku: ' + reittiJSON[i].lahto + '<br> Reitti päättyy: ' + reittiJSON[i].maaranpaa +
                         '<br> Lähtopäivä: ' + reittiJSON[i].paivamaara +
                         '<br>Lähtoaika: ' + reittiJSON[i].lahtoaika);
+
                 }
             }).addTo(kartta)
         })
@@ -99,11 +103,11 @@ function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara, lahtoAika) {
     var httpRequestlahto = new XMLHttpRequest()
     console.log("eka")
     httpRequestlahto.onload = () => {
-        
+
         jsonDatalahto = JSON.parse(httpRequestlahto.responseText)
 
         koordinaatit.push({ lat: jsonDatalahto[0].lat, lng: jsonDatalahto[0].lon })
-        
+
     }
 
     httpRequestlahto.open('GET', 'https://nominatim.openstreetmap.org/search?city=' + lahto + '&format=json')
@@ -112,9 +116,9 @@ function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara, lahtoAika) {
         console.log("toka")
         var httpRequestmaaranpaa = new XMLHttpRequest()
         httpRequestmaaranpaa.onload = () => {
-        jsonDatamaaranpaa = JSON.parse(httpRequestmaaranpaa.responseText)
-        koordinaatit.push({ lat: jsonDatamaaranpaa[0].lat, lng: jsonDatamaaranpaa[0].lon })
-        luoReitti(jsonDatalahto, jsonDatamaaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAika)
+            jsonDatamaaranpaa = JSON.parse(httpRequestmaaranpaa.responseText)
+            koordinaatit.push({ lat: jsonDatamaaranpaa[0].lat, lng: jsonDatamaaranpaa[0].lon })
+            luoReitti(jsonDatalahto, jsonDatamaaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAika)
         }
         httpRequestmaaranpaa.open('GET', 'https://nominatim.openstreetmap.org/search?city=' + maaranpaa + '&format=json')
         httpRequestmaaranpaa.send()
@@ -133,36 +137,56 @@ function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAi
 
     }
     reitti.push({
-        id: reittiID,
+        id : reitti.length ,
         kayttajanimi: kayttajanimi,
         paivamaara: paivamaara.split("-")[2] + '.' + paivamaara.split("-")[1] + '.' + paivamaara.split("-")[0],
         lahtoaika: lahtoAika,
         lahto: lahto[0].display_name.split(",")[0],
         maaranpaa: maaranpaa[0].display_name.split(",")[0],
+        valittu: false,
         router: L.Routing.control({
             show: false,
             geocoder: L.Control.Geocoder.nominatim(),
             routeWhileDragging: false,
             addWaypoints: false,
             waypoints: [L.latLng(lahto[0].lat, lahto[0].lon), L.latLng(maaranpaa[0].lat, maaranpaa[0].lon)],
+            lineOptions: {
+                styles: [{ color: "red", opacity: 0.7, weight: 4 }],
+            },
             createMarker: function(i = 0, wp, nWps) {
-                return L.marker(wp.latLng).bindPopup(
+                return marker = L.marker(wp.latLng).bindPopup(
                     'Reitin luoja: ' + kayttajanimi + '<br>' +
                     'Reitin Alku: ' + lahto[0].display_name.split(",")[0] + '<br> Reitti päättyy: ' + maaranpaa[0].display_name.split(",")[0] +
                     '<br> Lähtopäivä: ' + paivamaara.split("-")[2] + '.' + paivamaara.split("-")[1] + '.' + paivamaara.split("-")[0] +
-                    '<br>Lähtoaika: ' + lahtoAika);
-            }
+                    '<br>Lähtoaika: ' + lahtoAika).addEventListener("click", function(e){
+                        console.log(e.target)
+                        // if (!reitti[id].valittu) {
+                        //     reitti[id].router._line.getLayers()[6]._path.setAttribute("stroke", "green")
+                        //     reitti[id].valittu = true
+                        // } else {
+                        //     reitti[id].router._line.getLayers()[6]._path.setAttribute("stroke", "red")
+                        //     reitti[id].valittu = false
+                        // }
+                    })
+                    }
+            
         }).addTo(kartta)
     })
+
+
     console.log(reitti[reittiID])
     paivitaReittiID()
 }
 
+
+
 function paivitaReittiID() {
     reittiID = reitti.length
     console.log(reittiID)
-    tallennaReitit()
+        //tallennaReitit() 
 }
+
+
 
 function tallennaReitit() {
 
