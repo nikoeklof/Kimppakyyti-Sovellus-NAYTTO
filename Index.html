@@ -47,32 +47,29 @@
 
     <div id="sisalto">
         <div id="etsikyytia">
-            <div id="kartta" class="kartta">
-                <div id="avaaprofiilikuvake"><button id="avaaProfiili" onclick="avaaProfiili()">&#9787;</button></div>
+            <div id="avaaprofiilikuvake"><button id="avaaProfiili" value="0" onclick="avaaProfiili()">&#9787;</button></div>
 
-                <div id="avaapaivamaarahaku"><button id="avaaHaku" onclick="avaaHaku()">&#x1F50E;&#xFE0E;</button></div>
+                <div id="avaapaivamaarahaku"><button id="avaaHaku" value="0" onclick="avaaHaku()">&#x1F50E;&#xFE0E;</button></div>
 
-                <div id="avaakyydinluonti"><button id="avaaLuonti" onclick="avaakyydinluonti()">&#x2607;</button></div>
+                <div id="avaakyydinluonti"><button id="avaaLuonti" value="0" onclick="avaakyydinluonti()">&#x2607;</button></div>
 
-                <div id="avaainfosivu"><button id="avaaInfo" onclick="avaaInfo()">&#x2139;</button></div>
-                <div id="paivamaarahakupohja"><button id="suljeMenu" onclick="suljeMenu()">X</button>
+                <div id="avaainfosivu"><button id="avaaInfo" value="0" onclick="avaaInfo()">&#x2139;</button></div>
+                <div id="paivamaarahakupohja">
                     <h2>Hae kyytiä</h2><label for="paivamaarahaku">Päivämäärä: </label><input type="date" id="paivamaarahaku">
                     <button class="hakunapit" id="haekyyti" onclick="kartta.setView(L.latLng(65.34,26.98)),kartta.setZoom(5)">Hae kyydit</button><button class="hakunapit" id="kaikkikyydit">Näytä kaikki</button>
                 </div>
 
                 <div id="kyytilomake">
-                    <button id="suljeMenu" onclick="suljeMenu()">X</button>
                     <h2>Tarjoa kyytiä</h2>
                     <label for="lahtopaikka">Lähtöpaikka: </label>
                     <input type="text" id="lahtopaikka">
                     <label for="maaranpaa">Määränpää: </label>
                     <input type="text" id="maaranpaa">
-                    <label for="paivamaara">Päivämäärä: </label>
+                    <label for="paivamaara">Päivämäärä ja lähtöaika: </label>
                     <input type="date" id="paivamaara">
-                    <label for="kellonaika">Lähtöaika: </label>
                     <input type="time" id="kellonaika">
                     <br>
-                    <button id="luokyyti" onclick="luoKyyti(
+                    <button class="hakunapit" id="luokyyti" onclick="luoKyyti(
                   document.getElementById('lahtopaikka').value,
                  document.getElementById('maaranpaa').value,
                  kirjautunut,
@@ -80,23 +77,23 @@
                  document.getElementById('kellonaika').value)">Luo kyyti</button>
                 </div>
 
-                <div id="info"><button id="suljeMenu" onclick="suljeMenu()">X</button>
+                <div id="info">
                     <h2>Infosivu</h2>
                     <p>Mieleni minun tekevi, aivoni ajattelevi lähteäni laulamahan, saa'ani sanelemahan, sukuvirttä suoltamahan, lajivirttä laulamahan. Sanat suussani sulavat, puhe'et putoelevat, kielelleni kerkiävät, hampahilleni hajoovat.
                         <br><br> Veli kulta, veikkoseni, kaunis kasvinkumppalini! Lähe nyt kanssa laulamahan, saa kera sanelemahan yhtehen yhyttyämme, kahta'alta käytyämme! Harvoin yhtehen yhymme, saamme toinen toisihimme näillä raukoilla rajoilla, poloisilla
                         Pohjan mailla.</p>
                 </div>
 
-                <div id="profiili"><button id="suljeMenu" onclick="suljeMenu()">X</button>
+                <div id="profiili">
                     <h2>Profiili</h2>
                     <img src="img/profiilikuva.png" id="profiilikuva">
                     <p id="kirjautunutkayttaja">Et ole kirjautuneena sisään</p>
                     <p id="yhteystieto"></p>
                     <br>
+                    <p id="sisaankirjautuminenprofiili" onclick="location.reload()">Kirjaudu sisään</p>
+                    <p id="uloskirjautuminenprofiili" onclick="kirjauduUlos()">Kirjaudu ulos</p>
                 </div>
-
-
-            </div>
+            <div id="kartta" class="kartta"></div>
         </div>
     </div>
 

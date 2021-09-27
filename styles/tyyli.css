@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300&display=swap');
 
-
 .leaflet-top {
     margin-top:55px;
 }
@@ -26,6 +25,7 @@ html,body {
     z-index:99; 
  }
 p {
+    font-size: 0.8em;
     font-family: 'Mulish', sans-serif;
 }
 h1 {
@@ -34,6 +34,10 @@ h1 {
     line-height: 0;
 }
 h2 {
+    font-size: 1.4em;
+    letter-spacing: 1.2px;
+    color:rgb(49, 49, 49);
+    text-shadow: 0px 2px rgb(155, 154, 154);
     font-family: 'Lobster', cursive;
 }
 h3 {
@@ -113,12 +117,13 @@ h4 {
     box-shadow: 0px 0px 16px 2px rgba(49,49,49,1);
 }
 #kirjautuminen input {
-    font-size: 1.3em;
+    font-weight: bold;
+    font-size: 1em;
     background-color: rgb(49, 49, 49,0.5);
     width:200px;
     margin-top:10px;
     height:40px;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 #kirjautuminenError {
     display:none;
@@ -175,108 +180,169 @@ h4 {
     display:none;
     width:220px;
     max-width:220px;
-    background-color: aqua;
     margin: inherit;
     position: relative;
-    text-align: center;
     background-color:white;
     position: absolute;
     z-index:999999;
-    padding:5px;
-    top:95px;
-    right:22px;
+    top:97px;
+    right:21px;
     border: 1px solid rgb(49, 49, 49,0.5);
     border-radius: 4px;
     border-top-right-radius: 0px;
+    padding-bottom: 10px;
+    box-shadow:5px 5px rgb(49, 49, 49,0.2);
 }
-#kyytilomake input, label{
-    margin: 10px auto;
+#sisalto label{
+    color: rgb(49, 49, 49);  
+    text-shadow: 0px 1px rgb(175, 174, 174);   
+    margin-top: 10px;
+    margin-bottom: 1px;
+    margin-left:15px;
+    font-family:'Mulish', sans-serif;
+    font-size: 0.8em;
+    font-weight: bold;
+    display: block;
+    text-align: left;
 }
-
-
+#sisalto input {
+    font-family:'Mulish', sans-serif;
+    font-weight: bold;
+    padding:3px 3px;
+    background-color: rgb(49, 49, 49,0.2);
+    border-radius: 4px;
+}
+#maaranpaa, #lahtopaikka {
+    font-family:'Mulish', sans-serif;
+    font-weight: bold;
+    height:20px;
+    width:180px;
+}
+#kellonaika {
+    height:20px;
+    font-size: 0.6em;
+    width:65px;
+}
+#paivamaara {
+    height:20px;
+    font-size: 0.6em;
+    width:100px;
+}
+#paivamaarahaku { 
+    height:20px;
+    font-size: 0.7em;
+    width:180px;
+}
+#luokyyti {
+    margin-top: 20px;
+    width:130px;
+}
 
 #info {
     display:none;
     width:220px;
     max-width:220px;
-    padding-right: 1000px;
+    margin: inherit;
+    position: relative;
     background-color:white;
     position: absolute;
     z-index:999999;
-    padding:5px;
-    top:95px;
-    right:22px;
+    top:97px;
+    right:21px;
     border: 1px solid rgb(49, 49, 49,0.5);
     border-radius: 4px;
     border-top-right-radius: 0px;
+    box-shadow:5px 5px rgb(49, 49, 49,0.2);
+}
+#info p {
+    padding: 10px;
 }
 #profiili {
-    text-align:center;
     display:none;
     width:220px;
     max-width:220px;
+    margin: inherit;
+    position: relative;
     background-color:white;
     position: absolute;
     z-index:999999;
-    padding:5px;
-    top:95px;
-    right:22px;
+    top:97px;
+    right:21px;
     border: 1px solid rgb(49, 49, 49,0.5);
     border-radius: 4px;
     border-top-right-radius: 0px;
+    box-shadow:5px 5px rgb(49, 49, 49,0.2);
 }
 
 
 #paivamaarahakupohja {
+    box-shadow:5px 5px rgb(49, 49, 49,0.2);
     display:none;
     width:220px;
     max-width:220px;
+    margin: inherit;
+    position: relative;
     background-color:white;
     position: absolute;
     z-index:999999;
-    padding:5px;
-    top:95px;
-    right:22px;
+    top:97px;
+    right:21px;
     border: 1px solid rgb(49, 49, 49,0.5);
     border-radius: 4px;
     border-top-right-radius: 0px;
+    padding-bottom: 10px;
 }
 .hakunapit {
-    margin-top:5px;
+    margin-top:15px;
     margin-left: 5px;
+    cursor:pointer;
+    box-shadow:inset 0px 1px 3px 0px #91b8b3;
+	background-color:rgb(49, 49, 49);
+	border-radius:5px;
+	border:1px solid #566963;
+    color:#ffffff;
+    font-size: 0.7em;
+	font-family:'Mulish', sans-serif;
+	font-weight:bold;
+	padding:5px 10px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #2b665e;
 }
-#suljeMenu {
-    margin-top:-3px;
-    margin-right:-3px;
-    float:right;
-}
+
 #avaaHaku {
-    margin-left:-5px;
-    margin-top:-4px;
-    font-size: 1.5em;
+    cursor: pointer;
+    margin-left:-3px;
+    margin-top:-2px;
+    font-size: 1em;
     border:none;
-    background-color: white;
+    background-color:inherit;
 }
 #avaaLuonti {
-    margin-top:-5px;
-    font-size: 1.7em;
+    cursor: pointer;
+    margin-left:-2px;
+    margin-top:-6px;
+    font-size: 1.2em;
     border:none;
-    background-color: white;
+    background-color:inherit;
 }
 #avaaInfo {
-    margin-top:-4px;
-    font-size: 1.8em;
+    cursor: pointer;
+    margin-top:-2px;
+    font-size: 1.2em;
     border:none;
-    background-color: white;
+    background-color:inherit;
 }
 #avaaProfiili {
-    margin-left:-8px;
+    cursor: pointer;
+    margin-left:-7px;
     margin-top:-5px;
-    font-size: 1.9em;
+    font-size: 1.4em;
     border:none;
-    background-color: white;
+    background-color:inherit;
 }
+
 #avaapaivamaarahaku {
+    box-shadow: 0px 0px 0px 1px rgba(135, 135, 135, 0.9);
     height:20px;
     width:20px;
     background-color:white;
@@ -284,13 +350,15 @@ h4 {
     z-index:999999;
     padding:5px;
     top:65px;
-    right:115px;
-    border: 1px solid rgb(49, 49, 49,0.5);
+    right:119px;
+    border: 1px solid rgba(170, 170, 170, 0.6);
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
     overflow: hidden;
+    cursor: pointer;
 }
 #avaakyydinluonti {
+    box-shadow:0px 0px 0px 1px rgba(135, 135, 135, 0.9);
     height:20px;
     width:20px;
     background-color:white;
@@ -298,11 +366,13 @@ h4 {
     z-index:999999;
     padding:5px;
     top:65px;
-    right:84px;
-    border: 1px solid rgb(49, 49, 49,0.5);
+    right:86px;
+    border: 1px solid rgba(170, 170, 170, 0.6);
     overflow: hidden;
+    cursor: pointer;
 }
 #avaainfosivu{
+    box-shadow: 0px 0px 0px 1px rgba(135, 135, 135, 0.9);
     height:20px;
     width:20px;
     background-color:white;
@@ -311,12 +381,14 @@ h4 {
     padding:5px;
     top:65px;
     right:22px;
-    border: 1px solid rgb(49, 49, 49,0.5);
+    border: 1px solid rgba(170, 170, 170, 0.6);
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
     overflow: hidden;
+    cursor: pointer;
 }
 #avaaprofiilikuvake {
+    box-shadow: 0px 0px 0px 1px rgba(135, 135, 135, 0.9);
     height:20px;
     width:20px;
     background-color:white;
@@ -324,10 +396,14 @@ h4 {
     z-index:999999;
     padding:5px;
     top:65px;
-    right:53px;
-    border: 1px solid rgb(49, 49, 49,0.5);
+    right:54px;
+    border: 1px solid rgba(170, 170, 170, 0.6);
     border-radius: 0;
     overflow: hidden;
+    cursor: pointer;
+}
+#avaapaivamaarahaku:hover, #avaaprofiilikuvake:hover,#avaakyydinluonti:hover,#avaainfosivu:hover {
+    background-color: rgb(245, 245, 245) !important;
 }
 .kirjautuminenbanneri {
     position: absolute;
@@ -354,4 +430,29 @@ h4 {
 #profiilikuva {
     width:160px;
     height:160px;
+}
+#kirjautunutkayttaja {
+    font-weight: bold;
+}
+
+#sisaankirjautuminenprofiili {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color:rgb(143, 11, 11);
+    display: block;
+    float:right;
+    cursor: pointer;
+}
+#uloskirjautuminenprofiili {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color:rgb(143, 11, 11);
+    float:right;
+    cursor: pointer;
+    display: none;
+}
+#sisaankirjautuminenprofiili:hover,#uloskirjautuminenprofiili:hover {
+    background-color: rgb(255, 148, 8);
 }
