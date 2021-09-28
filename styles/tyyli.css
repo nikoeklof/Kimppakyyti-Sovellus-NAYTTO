@@ -361,13 +361,26 @@ h4 {
     background-color:inherit;
 }
 #suljeMenunappula {
+    position: inherit;
+    width: 21px;
+    height: 22px;
     color:#ffffff;
-    margin-left:-10px;
-    margin-top: -15px;  
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
     cursor: pointer;
-    font-size: 1.3em;
     border:none;
     background-color:inherit;
+    text-align: center;
+}
+#suljeMenunappula p{
+    height: inherit;
+    margin: 0;
+    font-size: 1.0rem;
+}
+#suljeMenunappula:hover {
+    background-color: rgb(255, 84, 84);
 }
 
 #avaapaivamaarahaku {
@@ -431,7 +444,7 @@ h4 {
     overflow: hidden;
     cursor: pointer;
 }
-#suljeMenu {
+#suljeMenudiv {
     display: none;
     height:10px;
     width:10px;
@@ -448,9 +461,7 @@ h4 {
     border-left:1px solid rgba(133, 130, 130, 0.6);
     z-index: 99999999999;
 }
-#suljeMenu:hover {
-    background-color: rgb(255, 84, 84);
-}
+
 .valitsematon:hover {
     background-color: rgb(245, 245, 245) !important;
 }

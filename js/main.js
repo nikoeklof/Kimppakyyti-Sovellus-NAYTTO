@@ -60,7 +60,7 @@ function suljeMenu() {
   document.getElementById("avaakyydinluonti").className = "valitsematon";
   document.getElementById("avaaprofiilikuvake").className = "valitsematon";
   document.getElementById("avaainfosivu").className = "valitsematon";
-  document.getElementById("suljeMenu").style.display="none";
+  document.getElementById("suljeMenudiv").style.display="none";
 }
 
 function avaaHaku() {
@@ -70,9 +70,9 @@ function avaaHaku() {
   document.getElementById("paivamaarahakupohja").style.display="block";
   document.getElementById("avaapaivamaarahaku").style.backgroundColor = "#d4c2c1";
   document.getElementById("avaapaivamaarahaku").className = "valittu";
-  document.getElementById("suljeMenu").style.display="block";
+  document.getElementById("suljeMenudiv").style.display="block";
 } else {
-  document.getElementById("suljeMenu").style.display="none";
+  document.getElementById("suljeMenudiv").style.display="none";
   document.getElementById("paivamaarahakupohja").style.display="none";
   document.getElementById("avaapaivamaarahaku").style.backgroundColor = "white";
   }
@@ -84,9 +84,9 @@ function avaaProfiili() {
     document.getElementById("profiili").style.display="block";
     document.getElementById("avaaprofiilikuvake").style.backgroundColor = "#d4c2c1";
     document.getElementById("avaaprofiilikuvake").className = "valittu";
-    document.getElementById("suljeMenu").style.display="block";
+    document.getElementById("suljeMenudiv").style.display="block";
  } else {
-   document.getElementById("suljeMenu").style.display="none";
+   document.getElementById("suljeMenudiv").style.display="none";
    document.getElementById("profiili").style.display="none";
    document.getElementById("avaaprofiilikuvake").style.backgroundColor = "white";
    }
@@ -98,9 +98,9 @@ function avaakyydinluonti() {
     document.getElementById("kyytilomake").style.display="block";
     document.getElementById("avaakyydinluonti").style.backgroundColor = "#d4c2c1";
     document.getElementById("avaakyydinluonti").className = "valittu";
-    document.getElementById("suljeMenu").style.display="block";
+    document.getElementById("suljeMenudiv").style.display="block";
   } else { 
-    document.getElementById("suljeMenu").style.display="none"; 
+    document.getElementById("suljeMenudiv").style.display="none"; 
     document.getElementById("kyytilomake").style.display="none";
     document.getElementById("avaakyydinluonti").style.backgroundColor = "white";
   }
@@ -111,9 +111,9 @@ function avaaInfo(){
     document.getElementById("info").style.display="block";
     document.getElementById("avaainfosivu").style.backgroundColor = "#d4c2c1";
     document.getElementById("avaainfosivu").className = "valittu";
-    document.getElementById("suljeMenu").style.display="block";
+    document.getElementById("suljeMenudiv").style.display="block";
   } else {
-    document.getElementById("suljeMenu").style.display="none";
+    document.getElementById("suljeMenudiv").style.display="none";
     document.getElementById("info").style.display="none";
     document.getElementById("avaainfosivu").style.backgroundColor = "white";
   }
