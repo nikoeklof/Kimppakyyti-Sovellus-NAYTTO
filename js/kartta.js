@@ -6,7 +6,18 @@ var reittiID;
 var kartta = L.map('kartta', {
     center: [0, 0],
     zoom: 13,
+
+}).addEventListener("click", (e) => {
+
     
+    if (!reitti.length > 0) {
+        return
+    } else {
+        for (let i = 0; i < reitti.length; i++) {
+            reitti[i].router._line.getLayers()[reitti[i].router._line.getLayers().length - 1]._path.setAttribute("stroke", "red")
+            reitti[i].valittu = false
+        }
+    }
 });
 var lineLayers = []
 kartta.addHandler
@@ -39,10 +50,10 @@ function lataaKyydit() {
                 geocoder: L.Control.Geocoder.nominatim(),
                 routeWhileDragging: false,
                 addWaypoints: false,
-                
+
                 waypoints: [reittiJSON[i].routerWaypoints[0], reittiJSON[i].routerWaypoints[1]],
                 lineOptions: {
-                    styles: [{ color: "red", opacity: 0.7, weight: 7 }],
+                    styles: [{ color: "red", opacity: 0.4, weight: 7 }],
                 },
                 createMarker: function(x, wp, nWps) {
                     return L.marker(wp.latLng).bindPopup(
@@ -135,7 +146,7 @@ function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAi
 
     }
     reitti.push({
-        id : reitti.length ,
+        id: reitti.length,
         kayttajanimi: kayttajanimi,
         paivamaara: paivamaara.split("-")[2] + '.' + paivamaara.split("-")[1] + '.' + paivamaara.split("-")[0],
         lahtoaika: lahtoAika,
@@ -152,22 +163,27 @@ function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAi
                 styles: [{ color: "red", opacity: 0.7, weight: 4 }],
             },
             createMarker: function(i = 0, wp, nWps) {
+                let thisID = reittiID
                 return marker = L.marker(wp.latLng).bindPopup(
                     'Reitin luoja: ' + kayttajanimi + '<br>' +
                     'Reitin Alku: ' + lahto[0].display_name.split(",")[0] + '<br> Reitti päättyy: ' + maaranpaa[0].display_name.split(",")[0] +
                     '<br> Lähtopäivä: ' + paivamaara.split("-")[2] + '.' + paivamaara.split("-")[1] + '.' + paivamaara.split("-")[0] +
-                    '<br>Lähtoaika: ' + lahtoAika).addEventListener("click", function(e){
-                        console.log(e.target)
-                        // if (!reitti[id].valittu) {
-                        //     reitti[id].router._line.getLayers()[6]._path.setAttribute("stroke", "green")
-                        //     reitti[id].valittu = true
-                        // } else {
-                        //     reitti[id].router._line.getLayers()[6]._path.setAttribute("stroke", "red")
-                        //     reitti[id].valittu = false
-                        // }
-                    })
+                    '<br>Lähtoaika: ' + lahtoAika).addEventListener("click", function() {
+                    for (let i = 0; i < reitti.length; i++) {
+                        reitti[i].router._line.getLayers()[reitti[i].router._line.getLayers().length - 1]._path.setAttribute("stroke", "red")
+                        reitti[i].valittu = false
                     }
-            
+                    if (!reitti[thisID].valittu) {
+                        reitti[thisID].router._line.getLayers()[reitti[thisID].router._line.getLayers().length - 1]._path.setAttribute("stroke", "green")
+                        reitti[thisID].valittu = true
+                    } else {
+                        reitti[thisID].router._line.getLayers()[reitti[thisID].router._line.getLayers().length - 1]._path.setAttribute("stroke", "red")
+                        
+                    }
+
+                })
+            }
+
         }).addTo(kartta)
     })
 
