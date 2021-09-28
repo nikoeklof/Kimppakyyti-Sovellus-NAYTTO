@@ -185,13 +185,18 @@ h4 {
     background-color:white;
     position: absolute;
     z-index:999999;
-    top:97px;
+    top:105px;
     right:21px;
     border: 1px solid rgb(49, 49, 49,0.5);
     border-radius: 4px;
-    border-top-right-radius: 0px;
     padding-bottom: 10px;
     box-shadow:5px 5px rgb(49, 49, 49,0.2);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 #sisalto label{
     color: rgb(49, 49, 49);  
@@ -247,12 +252,17 @@ h4 {
     background-color:white;
     position: absolute;
     z-index:999999;
-    top:97px;
+    top:105px;
     right:21px;
     border: 1px solid rgb(49, 49, 49,0.5);
     border-radius: 4px;
-    border-top-right-radius: 0px;
     box-shadow:5px 5px rgb(49, 49, 49,0.2);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 #info p {
     padding: 10px;
@@ -266,12 +276,17 @@ h4 {
     background-color:white;
     position: absolute;
     z-index:999999;
-    top:97px;
+    top:105px;
     right:21px;
     border: 1px solid rgb(49, 49, 49,0.5);
     border-radius: 4px;
-    border-top-right-radius: 0px;
     box-shadow:5px 5px rgb(49, 49, 49,0.2);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 
@@ -285,12 +300,17 @@ h4 {
     background-color:white;
     position: absolute;
     z-index:999999;
-    top:97px;
+    top:105px;
     right:21px;
     border: 1px solid rgb(49, 49, 49,0.5);
     border-radius: 4px;
-    border-top-right-radius: 0px;
     padding-bottom: 10px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .hakunapit {
     margin-top:15px;
@@ -337,6 +357,15 @@ h4 {
     margin-left:-7px;
     margin-top:-5px;
     font-size: 1.4em;
+    border:none;
+    background-color:inherit;
+}
+#suljeMenunappula {
+    color:#ffffff;
+    margin-left:-10px;
+    margin-top: -15px;  
+    cursor: pointer;
+    font-size: 1.3em;
     border:none;
     background-color:inherit;
 }
@@ -402,8 +431,31 @@ h4 {
     overflow: hidden;
     cursor: pointer;
 }
-#avaapaivamaarahaku:hover, #avaaprofiilikuvake:hover,#avaakyydinluonti:hover,#avaainfosivu:hover {
+#suljeMenu {
+    display: none;
+    height:10px;
+    width:10px;
+    background-color:rgb(206, 0, 0);
+    position: absolute;
+    z-index:999999;
+    padding:5px;
+    top:105px;
+    right:22px;
+    border-radius: 3px;
+    overflow: hidden;
+    cursor: pointer;
+    border-bottom:2px solid rgba(100, 98, 98, 0.6);
+    border-left:1px solid rgba(133, 130, 130, 0.6);
+    z-index: 99999999999;
+}
+#suljeMenu:hover {
+    background-color: rgb(255, 84, 84);
+}
+.valitsematon:hover {
     background-color: rgb(245, 245, 245) !important;
+}
+.valittu:hover {
+    background-color:#d4c2c1 !important;
 }
 .kirjautuminenbanneri {
     position: absolute;

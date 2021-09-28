@@ -47,13 +47,12 @@
 
     <div id="sisalto">
         <div id="etsikyytia">
-            <div id="avaaprofiilikuvake"><button id="avaaProfiili" value="0" onclick="avaaProfiili()">&#9787;</button></div>
+                <div id="avaaprofiilikuvake" class="valitsematon"><button id="avaaProfiili" onclick="avaaProfiili()">&#9787;</button></div>
+                <div id="avaapaivamaarahaku" class="valitsematon"><button id="avaaHaku" onclick="avaaHaku()">&#x1F50E;&#xFE0E;</button></div>
+                <div id="avaakyydinluonti" class="valitsematon"><button id="avaaLuonti" onclick="avaakyydinluonti()">&#x2607;</button></div>
+                <div id="avaainfosivu" class="valitsematon"><button id="avaaInfo" onclick="avaaInfo()">&#x2139;</button></div>
+                <div id="suljeMenu"><button id="suljeMenunappula" onclick="suljeMenu()">&#10006;</button></div>
 
-                <div id="avaapaivamaarahaku"><button id="avaaHaku" value="0" onclick="avaaHaku()">&#x1F50E;&#xFE0E;</button></div>
-
-                <div id="avaakyydinluonti"><button id="avaaLuonti" value="0" onclick="avaakyydinluonti()">&#x2607;</button></div>
-
-                <div id="avaainfosivu"><button id="avaaInfo" value="0" onclick="avaaInfo()">&#x2139;</button></div>
                 <div id="paivamaarahakupohja">
                     <h2>Hae kyytiä</h2><label for="paivamaarahaku">Päivämäärä: </label><input type="date" id="paivamaarahaku">
                     <button class="hakunapit" id="haekyyti" onclick="kartta.setView(L.latLng(65.34,26.98)),kartta.setZoom(5)">Hae kyydit</button><button class="hakunapit" id="kaikkikyydit">Näytä kaikki</button>
