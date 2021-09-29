@@ -520,6 +520,16 @@ h4 {
     background-color: rgb(255, 148, 8);
 }
 #kyytierror {
+    padding: 5px;
+    margin: 0;
+    height: 15px;
+    color: red;
+    font-weight: bold;
+}
+#hakuerror {
+    padding: 5px;
+    margin: 0;
+    height: 15px;
     color: red;
     font-weight: bold;
 }

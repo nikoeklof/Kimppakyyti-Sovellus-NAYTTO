@@ -55,6 +55,7 @@
 
                 <div id="paivamaarahakupohja">
                     <h2>Hae kyytiä</h2><label for="paivamaarahaku">Päivämäärä: </label><input type="date" id="paivamaarahaku">
+                    <p id="hakuerror"></p>
                     <button class="hakunapit" id="haekyyti" onclick="haeKyydit(),kartta.setView(L.latLng(65.34,26.98)),kartta.setZoom(6)">Hae kyydit</button><button class="hakunapit" id="kaikkikyydit" onclick="naytaKaikkiKyydit(), kartta.setView(L.latLng(65.34,26.98)),kartta.setZoom(6)">Näytä kaikki</button>
                 </div>
 
