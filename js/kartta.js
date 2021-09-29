@@ -3,13 +3,14 @@ var kayttajaLon;
 var reitti = [];
 var reittiJSON = []
 var reittiID;
+
 var kartta = L.map('kartta', {
     center: [0, 0],
     zoom: 13,
 
 }).addEventListener("click", (e) => {
 
-    
+
     if (!reitti.length > 0) {
         return
     } else {
@@ -33,6 +34,51 @@ window.onload = () => {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(naytaKoordinaatit)
 
+    }
+}
+
+function haeKyydit() {
+    let tanaan = new Date().toISOString().split("T")
+    let hakupaiva = document.getElementById("paivamaarahaku").value
+    let x = hakupaiva.split("-")
+    let hakupaiva1 = x[2] + '.' + x[1] + '.' + x[0] 
+    console.log(hakupaiva1)
+    tanaan.pop()
+    tanaan = tanaan[0].split("-")
+    
+    let tamaPaiva = tanaan[2] + '.' + tanaan[1] + '.' + tanaan[0]
+    console.log(tamaPaiva.split("."))
+    let paivat = [{
+        paiva: (parseInt(tamaPaiva.split(".")[0])), 
+        kuukausi: (parseInt(tamaPaiva.split(".")[1])),
+        vuosi: parseInt(tamaPaiva.split(".")[2])
+        },
+        {
+            paiva: (parseInt(hakupaiva1.split(".")[0])), 
+            kuukausi: (parseInt(hakupaiva1.split(".")[1])),
+            vuosi: parseInt(hakupaiva1.split(".")[2])
+        }]
+if(!(paivat[0].paiva < paivat[1].paiva && paivat[0].kuukausi <= paivat[1].kuukausi && paivat[0].vuosi <= paivat[1].vuosi)){
+
+}
+    for (let i = 0; i < reitti.length; i++) {
+        if (reitti[i].paivamaara != hakupaiva1) {
+            reitti[i].router.remove()
+        } else {
+            reitti[i].router.addTo(kartta)
+        }
+    }
+}
+
+function naytaKaikkiKyydit() {
+    for (let i = 0; i < reitti.length; i++) {
+        reitti[i].router.remove()
+
+    }
+    for (let i = 0; i < reitti.length; i++) {
+
+        reitti[i].router.addTo(kartta)
+        
     }
 }
 
@@ -104,6 +150,7 @@ kartta.on('click', (e) => {
 })
 
 function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara, lahtoAika) {
+    console.log(lahtoAika)
     var jsonDatalahto;
     var jsonDatamaaranpaa;
 
@@ -122,10 +169,11 @@ function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara, lahtoAika) {
     httpRequestlahto.open('GET', 'https://nominatim.openstreetmap.org/search?city=' + lahto + '&format=json')
     httpRequestlahto.send()
     setTimeout(() => {
-        console.log("toka")
+
         var httpRequestmaaranpaa = new XMLHttpRequest()
         httpRequestmaaranpaa.onload = () => {
             jsonDatamaaranpaa = JSON.parse(httpRequestmaaranpaa.responseText)
+            console.log(httpRequestmaaranpaa.responseText)
             koordinaatit.push({ lat: jsonDatamaaranpaa[0].lat, lng: jsonDatamaaranpaa[0].lon })
             luoReitti(jsonDatalahto, jsonDatamaaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAika)
         }
@@ -137,10 +185,7 @@ function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara, lahtoAika) {
 
 function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAika) {
 
-    if (kayttajanimi == null && paivamaara == null) {
-        kayttajanimi = ""
-        paivamaara = ""
-    }
+
     if (reittiID == undefined) {
         reittiID = 0
 
@@ -162,6 +207,7 @@ function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAi
             lineOptions: {
                 styles: [{ color: "red", opacity: 0.7, weight: 4 }],
             },
+
             createMarker: function(i = 0, wp, nWps) {
                 let thisID = reittiID
                 return marker = L.marker(wp.latLng).bindPopup(
@@ -178,7 +224,7 @@ function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAi
                         reitti[thisID].valittu = true
                     } else {
                         reitti[thisID].router._line.getLayers()[reitti[thisID].router._line.getLayers().length - 1]._path.setAttribute("stroke", "red")
-                        
+
                     }
 
                 })
@@ -196,7 +242,6 @@ function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAi
 
 function paivitaReittiID() {
     reittiID = reitti.length
-    console.log(reittiID)
         //tallennaReitit() 
 }
 
