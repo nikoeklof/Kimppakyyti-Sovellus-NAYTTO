@@ -519,3 +519,7 @@ h4 {
 #sisaankirjautuminenprofiili:hover,#uloskirjautuminenprofiili:hover {
     background-color: rgb(255, 148, 8);
 }
+#kyytierror {
+    color: red;
+    font-weight: bold;
+}

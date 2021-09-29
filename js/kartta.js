@@ -153,41 +153,92 @@ function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara, lahtoAika) {
     console.log(lahtoAika)
     var jsonDatalahto;
     var jsonDatamaaranpaa;
-
-
     let koordinaatit = [];
     var httpRequestlahto = new XMLHttpRequest()
     console.log("eka")
-    httpRequestlahto.onload = () => {
+    let tanaan = new Date().toISOString().slice(0, 10);
+    let kellonaika = new Date().toLocaleTimeString('en-US', { hour12: false,  hour: "numeric", minute: "numeric"});
+    var tunnit = parseInt(kellonaika.slice(0,2));
+    var minuutit = parseInt(kellonaika.slice(3));
+    var tunnitlahtoAika = parseInt(lahtoAika.slice(0,2));
+    var minuutitlahtoAika = parseInt(lahtoAika.slice(3));
+    var minuuttiCheck;
 
-        jsonDatalahto = JSON.parse(httpRequestlahto.responseText)
-
-        koordinaatit.push({ lat: jsonDatalahto[0].lat, lng: jsonDatalahto[0].lon })
-
+    console.log(paivamaara)
+    console.log(lahtoAika)
+    console.log(tanaan)
+    console.log(kellonaika)
+    console.log(lahto)
+    console.log(maaranpaa)
+    console.log(tunnit)
+    console.log(minuutit)
+    console.log(tunnitlahtoAika)
+    console.log(minuutitlahtoAika)
+    
+    if (paivamaara >= tanaan && tunnit < tunnitlahtoAika) {
+        minuuttiCheck = 1;
     }
+    if (paivamaara >= tanaan && tunnit === tunnitlahtoAika && minuutit < minuutitlahtoAika ) {
+        minuuttiCheck = 1;
+    }
+    if (paivamaara === tanaan && tunnit >= tunnitlahtoAika && minuutit >= minuutitlahtoAika) {   
+        document.getElementById("kyytierror").innerHTML = "Tarkista lähtöaika!";
+    }
+    if (lahtoAika === "") {
+        document.getElementById("kyytierror").innerHTML = "Tarkista lähtöaika!";
+    }
+    if (paivamaara < tanaan) { 
+        document.getElementById("kyytierror").innerHTML = "Tarkista lähtöpäivä!";
+    }
+    if (maaranpaa === "") {
+        document.getElementById("kyytierror").innerHTML = "Tarkista määränpää!";
+    }
+    if (lahto === "") {
+        document.getElementById("kyytierror").innerHTML = "Tarkista lähtöpaikka!";
+    }
+    if (kayttajanimi === undefined ) {
+        document.getElementById("kyytierror").innerHTML = "Kirjaudu sisään luodaksesi kyydin!";
+    }
+    
+    
 
-    httpRequestlahto.open('GET', 'https://nominatim.openstreetmap.org/search?city=' + lahto + '&format=json')
-    httpRequestlahto.send()
-    setTimeout(() => {
+    if (paivamaara >= tanaan && tunnitlahtoAika >= tunnit && minuuttiCheck === 1 && kayttajanimi != undefined && lahto != "" & maaranpaa != "") {
+                minuuttiCheck=0;
+                document.getElementById("kyytierror").innerHTML = "";
+                
+                httpRequestlahto.onload = () => {
 
-        var httpRequestmaaranpaa = new XMLHttpRequest()
-        httpRequestmaaranpaa.onload = () => {
-            jsonDatamaaranpaa = JSON.parse(httpRequestmaaranpaa.responseText)
-            console.log(httpRequestmaaranpaa.responseText)
-            koordinaatit.push({ lat: jsonDatamaaranpaa[0].lat, lng: jsonDatamaaranpaa[0].lon })
-            luoReitti(jsonDatalahto, jsonDatamaaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAika)
-        }
-        httpRequestmaaranpaa.open('GET', 'https://nominatim.openstreetmap.org/search?city=' + maaranpaa + '&format=json')
-        httpRequestmaaranpaa.send()
-    }, 1000)
+                    jsonDatalahto = JSON.parse(httpRequestlahto.responseText);
+
+                    koordinaatit.push({ lat: jsonDatalahto[0].lat, lng: jsonDatalahto[0].lon })
+
+                }
+
+                httpRequestlahto.open('GET', 'https://nominatim.openstreetmap.org/search?city=' + lahto + '&format=json')
+                httpRequestlahto.send()
+                setTimeout(() => {
+                    console.log("toka")
+                    var httpRequestmaaranpaa = new XMLHttpRequest();
+                    httpRequestmaaranpaa.onload = () => {
+                        jsonDatamaaranpaa = JSON.parse(httpRequestmaaranpaa.responseText);
+                        koordinaatit.push({ lat: jsonDatamaaranpaa[0].lat, lng: jsonDatamaaranpaa[0].lon })
+                        luoReitti(jsonDatalahto, jsonDatamaaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAika);
+                    }
+                    httpRequestmaaranpaa.open('GET', 'https://nominatim.openstreetmap.org/search?city=' + maaranpaa + '&format=json');
+                    httpRequestmaaranpaa.send();
+                }, 1000)
+    }   
 }
 
 
 function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAika) {
 
-
+    if (kayttajanimi == null && paivamaara == null) {
+        kayttajanimi = "";
+        paivamaara = "";
+    }
     if (reittiID == undefined) {
-        reittiID = 0
+        reittiID = 0;
 
     }
     reitti.push({
@@ -227,15 +278,16 @@ function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAi
 
                     }
 
-                })
+                });
             }
 
         }).addTo(kartta)
-    })
+    });
 
 
-    console.log(reitti[reittiID])
-    paivitaReittiID()
+    console.log(reitti[reittiID]);
+    paivitaReittiID();
+    suljeMenu();
 }
 
 
@@ -267,3 +319,19 @@ function tallennaReitit() {
 
 
 }
+
+function suljeMenu() {
+    document.getElementById("paivamaarahakupohja").style.display="none";
+    document.getElementById("kyytilomake").style.display="none";
+    document.getElementById("info").style.display="none";
+    document.getElementById("profiili").style.display="none";
+    document.getElementById("avaaprofiilikuvake").style.backgroundColor = "white";
+    document.getElementById("avaapaivamaarahaku").style.backgroundColor = "white";
+    document.getElementById("avaakyydinluonti").style.backgroundColor = "white";
+    document.getElementById("avaainfosivu").style.backgroundColor = "white";
+    document.getElementById("avaapaivamaarahaku").className = "valitsematon";
+    document.getElementById("avaakyydinluonti").className = "valitsematon";
+    document.getElementById("avaaprofiilikuvake").className = "valitsematon";
+    document.getElementById("avaainfosivu").className = "valitsematon";
+    document.getElementById("suljeMenudiv").style.display="none";
+  }
