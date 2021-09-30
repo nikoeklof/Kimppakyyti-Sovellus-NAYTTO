@@ -349,37 +349,51 @@ h4 {
 }
 
 #avaaHaku {
+    padding:0;
+    margin:0;
+    line-height:32px;
+    height:32px;
+    width:32px;
     cursor: pointer;
-    margin-left:-3px;
-    margin-top:-2px;
-    font-size: 1em;
+    font-size: 1.3em;
     border:none;
     background-color:inherit;
 }
 #avaaLuonti {
+    padding:0;
+    margin:0;
+    line-height:32px;
+    height:32px;
+    width:32px;
     cursor: pointer;
-    margin-left:-2px;
-    margin-top:-6px;
-    font-size: 1.2em;
+    font-size: 1.5em;
     border:none;
     background-color:inherit;
 }
 #avaaInfo {
+    padding:0;
+    margin:0;
+    line-height:32px;
+    height:32px;
+    width:32px;
     cursor: pointer;
-    margin-top:-2px;
-    font-size: 1.2em;
+    font-size: 1.5em;
     border:none;
     background-color:inherit;
 }
 #avaaProfiili {
+    padding:0;
+    margin:0;
+    line-height:32px;
+    height:32px;
+    width:32px;
     cursor: pointer;
-    margin-left:-7px;
-    margin-top:-5px;
-    font-size: 1.4em;
+    font-size: 1.5em;
     border:none;
     background-color:inherit;
 }
 #suljeMenunappula {
+    line-height:22px;
     position: inherit;
     width: 21px;
     height: 22px;
@@ -403,62 +417,70 @@ h4 {
 }
 
 #avaapaivamaarahaku {
-    box-shadow: 0px 0px 0px 1px rgba(135, 135, 135, 0.9);
-    height:20px;
-    width:20px;
+    
+    height:30px;
+    width:30px;
     background-color:white;
     position: absolute;
     z-index:999999;
-    padding:5px;
+    padding:0px;
     top:65px;
-    right:119px;
-    border: 1px solid rgba(170, 170, 170, 0.6);
+    right:116px;
+    border-style: solid;
+    border-color:#b1b1b1;
+    border-width: 2px 1px 2px 2px;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
     overflow: hidden;
     cursor: pointer;
 }
 #avaakyydinluonti {
-    box-shadow:0px 0px 0px 1px rgba(135, 135, 135, 0.9);
-    height:20px;
-    width:20px;
+    
+    height:30px;
+    width:30px;
     background-color:white;
     position: absolute;
     z-index:999999;
-    padding:5px;
+    padding:0px;
     top:65px;
-    right:86px;
-    border: 1px solid rgba(170, 170, 170, 0.6);
+    right:85px;
+    border-style: solid;
+    border-color:#b1b1b1;
+    border-width: 2px 1px 2px 0px;
     overflow: hidden;
     cursor: pointer;
 }
 #avaainfosivu{
-    box-shadow: 0px 0px 0px 1px rgba(135, 135, 135, 0.9);
-    height:20px;
-    width:20px;
+    
+    height:30px;
+    width:30px;
     background-color:white;
     position: absolute;
     z-index:999999;
-    padding:5px;
+    padding:0px;
     top:65px;
     right:22px;
-    border: 1px solid rgba(170, 170, 170, 0.6);
+    border-style: solid;
+    border-color:#b1b1b1;
+    border-width: 2px 2px 2px 1px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
     overflow: hidden;
     cursor: pointer;
 }
 #avaaprofiilikuvake {
-    box-shadow: 0px 0px 0px 1px rgba(135, 135, 135, 0.9);
-    height:20px;
-    width:20px;
+   
+    height:30px;
+    width:30px;
     background-color:white;
     position: absolute;
     z-index:999999;
-    padding:5px;
+    padding:0px;
     top:65px;
-    right:54px;
-    border: 1px solid rgba(170, 170, 170, 0.6);
+    right:55px;
+    border-style: solid;
+    border-color:#b1b1b1;
+    border-width: 2px 0px 2px 0px;
     border-radius: 0;
     overflow: hidden;
     cursor: pointer;
@@ -557,6 +579,12 @@ h4 {
     font-family: 'Mulish', sans-serif;
     font-size: 1em;
     text-align:left;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 #markerpopup a {
     color:black;
