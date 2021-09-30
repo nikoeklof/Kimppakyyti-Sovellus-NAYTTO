@@ -149,7 +149,7 @@ kartta.on('click', (e) => {
     console.log(klikkicoordinaatit.lat, klikkicoordinaatit.lng)
 })
 
-function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara, lahtoAika,yhteystieto) {
+function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara, lahtoAika, yhteystieto) {
     var jsonDatalahto;
     var jsonDatamaaranpaa;
     let koordinaatit = [];
@@ -191,35 +191,35 @@ function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara, lahtoAika,yhteysti
 
 
     if (paivamaara >= tanaan && tunnitlahtoAika >= tunnit && minuuttiCheck === 1 && kayttajanimi != undefined && lahto != "" & maaranpaa != "") {
-                minuuttiCheck=0;
-                document.getElementById("kyytierror").innerHTML = "";
-                
-                httpRequestlahto.onload = () => {
-                    jsonDatalahto = JSON.parse(httpRequestlahto.responseText);
-                    koordinaatit.push({ lat: jsonDatalahto[0].lat, lng: jsonDatalahto[0].lon })
+        minuuttiCheck = 0;
+        document.getElementById("kyytierror").innerHTML = "";
 
-                }
+        httpRequestlahto.onload = () => {
+            jsonDatalahto = JSON.parse(httpRequestlahto.responseText);
+            koordinaatit.push({ lat: jsonDatalahto[0].lat, lng: jsonDatalahto[0].lon })
 
-                httpRequestlahto.open('GET', 'https://nominatim.openstreetmap.org/search?city=' + lahto + '&format=json')
-                httpRequestlahto.send()
-                setTimeout(() => {
-                    console.log("toka")
-                    var httpRequestmaaranpaa = new XMLHttpRequest();
-                    httpRequestmaaranpaa.onload = () => {
-                        jsonDatamaaranpaa = JSON.parse(httpRequestmaaranpaa.responseText);
-                        koordinaatit.push({ lat: jsonDatamaaranpaa[0].lat, lng: jsonDatamaaranpaa[0].lon })
-                        luoReitti(jsonDatalahto, jsonDatamaaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAika,yhteystieto);
-                    }
-                    httpRequestmaaranpaa.open('GET', 'https://nominatim.openstreetmap.org/search?city=' + maaranpaa + '&format=json');
-                    httpRequestmaaranpaa.send();
-                }, 1000)
-    }   
+        }
+
+        httpRequestlahto.open('GET', 'https://nominatim.openstreetmap.org/search?city=' + lahto + '&format=json')
+        httpRequestlahto.send()
+        setTimeout(() => {
+            console.log("toka")
+            var httpRequestmaaranpaa = new XMLHttpRequest();
+            httpRequestmaaranpaa.onload = () => {
+                jsonDatamaaranpaa = JSON.parse(httpRequestmaaranpaa.responseText);
+                koordinaatit.push({ lat: jsonDatamaaranpaa[0].lat, lng: jsonDatamaaranpaa[0].lon })
+                luoReitti(jsonDatalahto, jsonDatamaaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAika, yhteystieto);
+            }
+            httpRequestmaaranpaa.open('GET', 'https://nominatim.openstreetmap.org/search?city=' + maaranpaa + '&format=json');
+            httpRequestmaaranpaa.send();
+        }, 1000)
+    }
 }
 
 
 
 
-function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAika) {
+function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAika, yhteystieto) {
     if (reittiID == undefined) {
         reittiID = 0;
     }
@@ -245,15 +245,15 @@ function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAi
             createMarker: function(i = 0, wp, nWps) {
                 let thisID = reittiID
                 return marker = L.marker(wp.latLng).bindPopup(
-                    '<div id="markerpopup"><button id="poistareittinappula" onclick="poistaReitti()">Poista reitti</button>'+
-                    '<h5>Reitin tiedot</h5>'+
-                    '<span id="popupteksti">LÄHTÖPAIKKA JA -AIKA: </span><p><span id="isompitekstipopup">' + lahto[0].display_name.split(",")[0] +'</span>'+ 
-                    '<p>' + paivamaara.split("-")[2] + '.' + paivamaara.split("-")[1] + '.' + paivamaara.split("-")[0] +" klo: "+ lahtoAika+
-                    '</p><span id="popupteksti">MÄÄRÄNPÄÄ: </span><p><span id="isompitekstipopup">' + maaranpaa[0].display_name.split(",")[0] +'</span>'+
+                    '<div id="markerpopup"><button id="poistareittinappula" onclick="poistaReitti()">Poista reitti</button>' +
+                    '<h5>Reitin tiedot</h5>' +
+                    '<span id="popupteksti">LÄHTÖPAIKKA JA -AIKA: </span><p><span id="isompitekstipopup">' + lahto[0].display_name.split(",")[0] + '</span>' +
+                    '<p>' + paivamaara.split("-")[2] + '.' + paivamaara.split("-")[1] + '.' + paivamaara.split("-")[0] + " klo: " + lahtoAika +
+                    '</p><span id="popupteksti">MÄÄRÄNPÄÄ: </span><p><span id="isompitekstipopup">' + maaranpaa[0].display_name.split(",")[0] + '</span>' +
                     '</p><span id="popupteksti">KULJETTAJA: </span><p><span id="isompitekstipopup">' + kayttajanimi +
-                    '</span></p><p>'+ '<a href="tel:'+yhteystieto+'">'+'&#9742; '+yhteystieto+'</a>'+
-                    '</p><br>'+'</div>'
-                    ).addEventListener("click", function() {
+                    '</span></p><p>' + '<a href="tel:' + yhteystieto + '">' + '&#9742; ' + yhteystieto + '</a>' +
+                    '</p><br>' + '</div>'
+                ).addEventListener("click", function() {
                     for (let i = 0; i < reitti.length; i++) {
                         reitti[i].router._line.getLayers()[reitti[i].router._line.getLayers().length - 1]._path.setAttribute("stroke", "red")
                         reitti[i].valittu = false
