@@ -21,17 +21,13 @@ var kartta = L.map('kartta', {
 
 window.onload = () => {
 
-    // if (localStorage.getItem("tallennetutReitit") != null) {
-    //     reittiJSON = JSON.parse(localStorage.getItem("tallennetutReitit"))
-    //     console.log(reittiJSON)
-
-    //      lataaKyydit()
-
-    // }
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(naytaKoordinaatit)
-
+    if (localStorage.getItem("tallennetutReitit") != null) {
+        reittiJSON = JSON.parse(localStorage.getItem("tallennetutReitit"))
+        console.log(reittiJSON)
+        lataaKyydit()
     }
+        naytaKoordinaatit()
+   
 }
 
 function haeKyydit() {
@@ -76,6 +72,7 @@ function lataaKyydit() {
                 lahtoaika: reittiJSON[i].lahtoaika,
                 lahto: reittiJSON[i].lahto,
                 maaranpaa: reittiJSON[i].maaranpaa,
+                yhteystieto: reittiJSON[i].yhteystieto,
                 router: L.Routing.control({
                     show: false,
                     geocoder: L.Control.Geocoder.nominatim(),
@@ -88,10 +85,14 @@ function lataaKyydit() {
                     },
                     createMarker: function(x, wp, nWps) {
                         return L.marker(wp.latLng).bindPopup(
-                            'Reitin luoja: ' + reittiJSON[i].kayttajanimi + '<br>' +
-                            'Reitin Alku: ' + reittiJSON[i].lahto + '<br> Reitti päättyy: ' + reittiJSON[i].maaranpaa +
-                            '<br> Lähtopäivä: ' + reittiJSON[i].paivamaara.split("-")[2] + '.' + reittiJSON[i].paivamaara.split("-")[1] + '.' + reittiJSON[i].paivamaara.split("-")[0] +
-                            '<br>Lähtoaika: ' + reittiJSON[i].lahtoaika).addEventListener("click", function() {
+                            '<div id="markerpopup"><button id="poistareittinappula" onclick="poistaReitti()">Poista reitti</button>' +
+                            '<h5>Reitin tiedot</h5>' +
+                            '<span id="popupteksti">LÄHTÖPAIKKA JA -AIKA: </span><p><span id="isompitekstipopup">' + reittiJSON[i].lahto + '</span>' +
+                            '<p>' + reittiJSON[i].paivamaara.split("-")[2] + '.' + reittiJSON[i].paivamaara.split("-")[1] + '.' + reittiJSON[i].paivamaara.split("-")[0] + " klo: " + reittiJSON[i].lahtoaika +
+                            '</p><span id="popupteksti">MÄÄRÄNPÄÄ: </span><p><span id="isompitekstipopup">' +reittiJSON[i].maaranpaa + '</span>' +
+                            '</p><span id="popupteksti">KULJETTAJA: </span><p><span id="isompitekstipopup">' + reittiJSON[i].kayttajanimi +
+                            '</span></p><p>' + '<a href="tel:' + reittiJSON[i].yhteystieto + '">' + '&#9742; ' + reittiJSON[i].yhteystieto + '</a>' +
+                            '</p><br>' + '</div>').addEventListener("click", function() {
                             let thisID = i
                             for (let i = 0; i < reitti.length; i++) {
                                 reitti[i].router._line.getLayers()[reitti[i].router._line.getLayers().length - 1]._path.setAttribute("stroke", "red")
@@ -118,17 +119,11 @@ function lataaKyydit() {
 
 }
 
-function naytaKoordinaatit(koordinaatit) {
+function naytaKoordinaatit() {
     let zoom = 7
-    if (navigator.geolocation) {
-        kayttajaLat = koordinaatit.coords.latitude
-        kayttajaLon = koordinaatit.coords.longitude
-        zoom = 13
-
-    } else {
+    
         kayttajaLat = 63.00
         kayttajaLon = 25.50
-    }
     luoKartta(kayttajaLat, kayttajaLon, zoom)
 
 }
@@ -231,6 +226,7 @@ function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAi
         lahtoaika: lahtoAika,
         lahto: lahto[0].display_name.split(",")[0],
         maaranpaa: maaranpaa[0].display_name.split(",")[0],
+        yhteystieto: yhteystieto,
         valittu: false,
         router: L.Routing.control({
             show: false,
@@ -296,6 +292,7 @@ function tallennaReitit() {
         lahtoaika: reitti[reitti.length - 1].lahtoaika,
         lahto: reitti[reitti.length - 1].lahto,
         maaranpaa: reitti[reitti.length - 1].maaranpaa,
+        yhteystieto: reitti[reitti.length - 1].yhteystieto,
         routerWaypoints: [reitti[reitti.length - 1].router.getWaypoints()[0].latLng, reitti[reitti.length - 1].router.getWaypoints()[1].latLng],
 
     }
