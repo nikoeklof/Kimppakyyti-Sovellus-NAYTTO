@@ -73,7 +73,7 @@ function lataaKyydit() {
                 lahto: reittiJSON[i].lahto,
                 maaranpaa: reittiJSON[i].maaranpaa,
                 yhteystieto: reittiJSON[i].yhteystieto,
-                lisaTiedot:reittiJSON[i].lisaTiedot,
+                lisaTiedot: reittiJSON[i].lisaTiedot,
                 router: L.Routing.control({
                     show: false,
                     geocoder: L.Control.Geocoder.nominatim(),
@@ -93,6 +93,7 @@ function lataaKyydit() {
                             '</p><span id="popupteksti">MÄÄRÄNPÄÄ: </span><p><span id="isompitekstipopup">' + reittiJSON[i].maaranpaa + '</span>' +
                             '</p><span id="popupteksti">KULJETTAJA: </span><p><span id="isompitekstipopup">' + reittiJSON[i].kayttajanimi +
                             '</span></p><p>' + '<a href="tel:' + reittiJSON[i].yhteystieto + '">' + '&#9742; ' + reittiJSON[i].yhteystieto + '</a>' +
+                            '</p><br>' + '</p><span id="popupteksti">LISÄTIEDOT: </span><p>' + reittiJSON[i].lisaTiedot +
                             '</p><br>' + '</div>').addEventListener("click", function() {
                             let thisID = i
                             for (let i = 0; i < reitti.length; i++) {
@@ -204,7 +205,7 @@ function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara, lahtoAika, yhteyst
             httpRequestmaaranpaa.onload = () => {
                 jsonDatamaaranpaa = JSON.parse(httpRequestmaaranpaa.responseText);
                 koordinaatit.push({ lat: jsonDatamaaranpaa[0].lat, lng: jsonDatamaaranpaa[0].lon })
-                luoReitti(jsonDatalahto, jsonDatamaaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAika, yhteystieto,viesti);
+                luoReitti(jsonDatalahto, jsonDatamaaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAika, yhteystieto, viesti);
             }
             httpRequestmaaranpaa.open('GET', 'https://nominatim.openstreetmap.org/search?city=' + maaranpaa + '&format=json');
             httpRequestmaaranpaa.send();
@@ -215,7 +216,7 @@ function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara, lahtoAika, yhteyst
 
 
 
-function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAika, yhteystieto,viesti) {
+function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAika, yhteystieto, viesti) {
     if (reittiID == undefined) {
         reittiID = 0;
     }
@@ -250,7 +251,7 @@ function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAi
                     '</p><span id="popupteksti">MÄÄRÄNPÄÄ: </span><p><span id="isompitekstipopup">' + maaranpaa[0].display_name.split(",")[0] + '</span>' +
                     '</p><span id="popupteksti">KULJETTAJA: </span><p><span id="isompitekstipopup">' + kayttajanimi +
                     '</span></p><p>' + '<a href="tel:' + yhteystieto + '">' + '&#9742; ' + yhteystieto + '</a>' +
-                    '</p><span id="popupteksti">LISÄTIEDOT: </span><p>'+viesti+
+                    '</p><span id="popupteksti">LISÄTIEDOT: </span><p>' + viesti +
                     '</p><br>' + '</div>'
                 ).addEventListener("click", function() {
                     for (let i = 0; i < reitti.length; i++) {
