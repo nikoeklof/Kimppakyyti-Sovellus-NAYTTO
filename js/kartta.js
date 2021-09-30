@@ -145,7 +145,7 @@ kartta.on('click', (e) => {
     console.log(klikkicoordinaatit.lat, klikkicoordinaatit.lng)
 })
 
-function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara, lahtoAika, yhteystieto,viesti) {
+function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara, lahtoAika, yhteystieto, viesti) {
     var jsonDatalahto;
     var jsonDatamaaranpaa;
     let koordinaatit = [];
@@ -228,7 +228,7 @@ function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAi
         lahto: lahto[0].display_name.split(",")[0],
         maaranpaa: maaranpaa[0].display_name.split(",")[0],
         yhteystieto: yhteystieto,
-        lisaTiedot: lisaTiedot,
+        lisaTiedot: viesti,
         valittu: false,
         router: L.Routing.control({
             show: false,
