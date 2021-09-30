@@ -226,7 +226,7 @@ h4 {
     width:180px;
 }
 
-#viesti {
+textarea {
     background-color: rgb(49, 49, 49,0.2);
     border-radius: 4px;
     font-family:'Mulish', sans-serif;
