@@ -225,14 +225,14 @@ h4 {
     height:20px;
     width:180px;
 }
+
 #viesti {
     background-color: rgb(49, 49, 49,0.2);
     border-radius: 4px;
     font-family:'Mulish', sans-serif;
     font-size: 0.7em;
     font-weight: bold;
-    height:50px;
-    width:180px;
+    resize: none;
 }
 #kellonaika {
     height:20px;
