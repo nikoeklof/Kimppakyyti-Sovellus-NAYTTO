@@ -144,7 +144,7 @@ kartta.on('click', (e) => {
     console.log(klikkicoordinaatit.lat, klikkicoordinaatit.lng)
 })
 
-function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara, lahtoAika, yhteystieto) {
+function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara, lahtoAika, yhteystieto,viesti) {
     var jsonDatalahto;
     var jsonDatamaaranpaa;
     let koordinaatit = [];
@@ -203,7 +203,7 @@ function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara, lahtoAika, yhteyst
             httpRequestmaaranpaa.onload = () => {
                 jsonDatamaaranpaa = JSON.parse(httpRequestmaaranpaa.responseText);
                 koordinaatit.push({ lat: jsonDatamaaranpaa[0].lat, lng: jsonDatamaaranpaa[0].lon })
-                luoReitti(jsonDatalahto, jsonDatamaaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAika, yhteystieto);
+                luoReitti(jsonDatalahto, jsonDatamaaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAika, yhteystieto,viesti);
             }
             httpRequestmaaranpaa.open('GET', 'https://nominatim.openstreetmap.org/search?city=' + maaranpaa + '&format=json');
             httpRequestmaaranpaa.send();
@@ -214,7 +214,7 @@ function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara, lahtoAika, yhteyst
 
 
 
-function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAika, yhteystieto) {
+function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAika, yhteystieto,viesti) {
     if (reittiID == undefined) {
         reittiID = 0;
     }
@@ -248,6 +248,7 @@ function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAi
                     '</p><span id="popupteksti">MÄÄRÄNPÄÄ: </span><p><span id="isompitekstipopup">' + maaranpaa[0].display_name.split(",")[0] + '</span>' +
                     '</p><span id="popupteksti">KULJETTAJA: </span><p><span id="isompitekstipopup">' + kayttajanimi +
                     '</span></p><p>' + '<a href="tel:' + yhteystieto + '">' + '&#9742; ' + yhteystieto + '</a>' +
+                    '</p><span id="popupteksti">LISÄTIEDOT: </span><p>'+viesti+
                     '</p><br>' + '</div>'
                 ).addEventListener("click", function() {
                     for (let i = 0; i < reitti.length; i++) {
