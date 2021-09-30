@@ -239,7 +239,6 @@ function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAi
             lineOptions: {
                 styles: [{ color: "red", opacity: 0.7, weight: 4 }],
             },
-
             createMarker: function(i = 0, wp, nWps) {
                 let thisID = reittiID
                 return marker = L.marker(wp.latLng).bindPopup(
