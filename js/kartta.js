@@ -86,7 +86,7 @@ function lataaKyydit() {
                     },
                     createMarker: function(x, wp, nWps) {
                         return L.marker(wp.latLng).bindPopup(
-                            '<div id="markerpopup"><button id="poistareittinappula" onclick="poistaReitti()">Poista reitti</button>' +
+                            '<div id="markerpopup"><button id="poistareittinappula" onclick="poistaReitti()">Poista kyyti</button>' +
                             '<h5>Reitin tiedot</h5>' +
                             '<span id="popupteksti">LÄHTÖPAIKKA JA -AIKA: </span><p><span id="isompitekstipopup">' + reittiJSON[i].lahto + '</span>' +
                             '<p>' + reittiJSON[i].paivamaara.split("-")[2] + '.' + reittiJSON[i].paivamaara.split("-")[1] + '.' + reittiJSON[i].paivamaara.split("-")[0] + " klo: " + reittiJSON[i].lahtoaika +
@@ -243,7 +243,7 @@ function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAi
             createMarker: function(i = 0, wp, nWps) {
                 let thisID = reittiID
                 return marker = L.marker(wp.latLng).bindPopup(
-                    '<div id="markerpopup"><button id="poistareittinappula" onclick="poistaReitti()">Poista reitti</button>' +
+                    '<div id="markerpopup"><button id="poistareittinappula" onclick="poistaReitti()">Poista kyyti</button>' +
                     '<h5>Reitin tiedot</h5>' +
                     '<span id="popupteksti">LÄHTÖPAIKKA JA -AIKA: </span><p><span id="isompitekstipopup">' + lahto[0].display_name.split(",")[0] + '</span>' +
                     '<p>' + paivamaara.split("-")[2] + '.' + paivamaara.split("-")[1] + '.' + paivamaara.split("-")[0] + " klo: " + lahtoAika +
