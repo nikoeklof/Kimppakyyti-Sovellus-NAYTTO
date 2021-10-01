@@ -279,11 +279,12 @@ function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAi
 }
 
 function poistaReitti(index) {
-    localStorage.removeItem('tallennetutReitit')
+
     reitti[index].router.remove()
-    reitti.splice(index, 1)
-    if (reitti.length < 1) {
+    if (reitti.length == 1) {
         reitti = []
+    } else {
+        reitti.splice(index, 1)
     }
     paivitaReittiID()
 }
@@ -298,23 +299,28 @@ function paivitaReittiID() {
 
 
 function tallennaReitit() {
-    
-    for (let i = 0; i < reitti.length; i++) {
-        if (reitti[i] != undefined) {
-            var Reittistring = {
-                id: reitti[i].id,
-                kayttajanimi: reitti[i].kayttajanimi,
-                paivamaara: reitti[i].paivamaara,
-                lahtoaika: reitti[i].lahtoaika,
-                lahto: reitti[i].lahto,
-                maaranpaa: reitti[i].maaranpaa,
-                yhteystieto: reitti[i].yhteystieto,
-                lisaTiedot: reitti[i].lisaTiedot,
-                routerWaypoints: [reitti[i].router.getWaypoints()[0].latLng, reitti[i].router.getWaypoints()[1].latLng],
+    if (reitti.length != 0) {
+        for (let i = 0; i < reitti.length; i++) {
+            if (reitti[i] != undefined) {
+                var Reittistring = {
+                    id: reitti[i].id,
+                    kayttajanimi: reitti[i].kayttajanimi,
+                    paivamaara: reitti[i].paivamaara,
+                    lahtoaika: reitti[i].lahtoaika,
+                    lahto: reitti[i].lahto,
+                    maaranpaa: reitti[i].maaranpaa,
+                    yhteystieto: reitti[i].yhteystieto,
+                    lisaTiedot: reitti[i].lisaTiedot,
+                    routerWaypoints: [reitti[i].router.getWaypoints()[0].latLng, reitti[i].router.getWaypoints()[1].latLng],
 
+                }
+                reittiJSON.push(Reittistring)
             }
-            reittiJSON.push(Reittistring)
         }
+    }else{
+        localStorage.removeItem('tallennetutReitit')
+        reittiJSON = []
+        return
     }
 
 
