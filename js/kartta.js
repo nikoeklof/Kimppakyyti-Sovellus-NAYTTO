@@ -86,7 +86,7 @@ function lataaKyydit() {
                     },
                     createMarker: function(x, wp, nWps) {
                         return L.marker(wp.latLng).bindPopup(
-                            '<div id="markerpopup"><button id="poistareittinappula" onclick="poistaReitti()">Poista kyyti</button>' +
+                            '<div id="markerpopup"><button id="poistareittinappula" onclick="poistaReitti(' + i + ')">Poista kyyti</button>' +
                             '<h5>Reitin tiedot</h5>' +
                             '<span id="popupteksti">LÄHTÖPAIKKA JA -AIKA: </span><p><span id="isompitekstipopup">' + reittiJSON[i].lahto + '</span>' +
                             '<p>' + reittiJSON[i].paivamaara.split("-")[2] + '.' + reittiJSON[i].paivamaara.split("-")[1] + '.' + reittiJSON[i].paivamaara.split("-")[0] + " klo: " + reittiJSON[i].lahtoaika +
@@ -193,6 +193,7 @@ function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara, lahtoAika, yhteyst
 
         httpRequestlahto.onload = () => {
             jsonDatalahto = JSON.parse(httpRequestlahto.responseText);
+            console.log(jsonDatalahto)
             koordinaatit.push({ lat: jsonDatalahto[0].lat, lng: jsonDatalahto[0].lon })
 
         }
@@ -243,7 +244,7 @@ function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAi
             createMarker: function(i = 0, wp, nWps) {
                 let thisID = reittiID
                 return marker = L.marker(wp.latLng).bindPopup(
-                    '<div id="markerpopup"><button id="poistareittinappula" onclick="poistaReitti()">Poista kyyti</button>' +
+                    '<div id="markerpopup"><button id="poistareittinappula" onclick="poistaReitti(' + reittiID + ')">Poista kyyti</button>' +
                     '<h5>Reitin tiedot</h5>' +
                     '<span id="popupteksti">LÄHTÖPAIKKA JA -AIKA: </span><p><span id="isompitekstipopup">' + lahto[0].display_name.split(",")[0] + '</span>' +
                     '<p>' + paivamaara.split("-")[2] + '.' + paivamaara.split("-")[1] + '.' + paivamaara.split("-")[0] + " klo: " + lahtoAika +
@@ -277,6 +278,17 @@ function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAi
 
 }
 
+function poistaReitti(index) {
+
+    reitti[index].router.remove()
+    if (reitti.length == 1) {
+        reitti = []
+    } else {
+        reitti.splice(index, 1)
+    }
+    paivitaReittiID()
+}
+
 
 
 function paivitaReittiID() {
@@ -287,22 +299,33 @@ function paivitaReittiID() {
 
 
 function tallennaReitit() {
+    if (reitti.length != 0) {
+        for (let i = 0; i < reitti.length; i++) {
+            if (reitti[i] != undefined) {
+                var Reittistring = {
+                    id: reitti[i].id,
+                    kayttajanimi: reitti[i].kayttajanimi,
+                    paivamaara: reitti[i].paivamaara,
+                    lahtoaika: reitti[i].lahtoaika,
+                    lahto: reitti[i].lahto,
+                    maaranpaa: reitti[i].maaranpaa,
+                    yhteystieto: reitti[i].yhteystieto,
+                    lisaTiedot: reitti[i].lisaTiedot,
+                    routerWaypoints: [reitti[i].router.getWaypoints()[0].latLng, reitti[i].router.getWaypoints()[1].latLng],
 
-    var Reittistring = {
-        id: reitti[reitti.length - 1].id,
-        kayttajanimi: reitti[reitti.length - 1].kayttajanimi,
-        paivamaara: reitti[reitti.length - 1].paivamaara,
-        lahtoaika: reitti[reitti.length - 1].lahtoaika,
-        lahto: reitti[reitti.length - 1].lahto,
-        maaranpaa: reitti[reitti.length - 1].maaranpaa,
-        yhteystieto: reitti[reitti.length - 1].yhteystieto,
-        lisaTiedot: reitti[reitti.length - 1].lisaTiedot,
-        routerWaypoints: [reitti[reitti.length - 1].router.getWaypoints()[0].latLng, reitti[reitti.length - 1].router.getWaypoints()[1].latLng],
-
+                }
+                reittiJSON.push(Reittistring)
+            }
+        }
+    }else{
+        localStorage.removeItem('tallennetutReitit')
+        reittiJSON = []
+        return
     }
-    reittiJSON.push(Reittistring)
-    localStorage.setItem('tallennetutReitit', JSON.stringify(reittiJSON))
 
+
+    localStorage.setItem('tallennetutReitit', JSON.stringify(reittiJSON))
+    reittiJSON = []
 
 
 }
