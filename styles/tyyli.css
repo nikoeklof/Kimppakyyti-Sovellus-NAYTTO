@@ -571,7 +571,7 @@ h4 {
     cursor: pointer;
     display: none;
 }
-#sisaankirjautuminenprofiili:hover,#uloskirjautuminenprofiili:hover,#poistareittinappula:hover {
+#sisaankirjautuminenprofiili:hover,#uloskirjautuminenprofiili:hover,.poistareittinappula:hover {
     background-color: rgb(255, 148, 8);
 }
 #kyytierror {
@@ -639,7 +639,7 @@ h5 {
     line-height: 30px;  
     text-shadow: 0px 2px rgb(155, 154, 154);
 }
-#poistareittinappula {
+.poistareittinappula {
     padding:none;
     margin:none;
     position: absolute;
