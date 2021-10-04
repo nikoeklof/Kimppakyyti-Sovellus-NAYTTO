@@ -281,7 +281,7 @@ textarea {
     font-size: 0.8em;
     margin:0px;
     margin-top:10px;
-    margin-left:35px;
+    margin-left:50px;
     margin-bottom: 10px;
     padding-right:30px;
 }
@@ -358,50 +358,42 @@ textarea {
 }
 
 #avaaHaku {
-    font-family: monospace;
     padding:0;
     margin:0;
-    line-height:32px;
-    height:32px;
-    width:32px;
+    height:16px;
+    width:16px;
+    margin-top:7px;
     cursor: pointer;
-    font-size: 1.1em;
     border:none;
     background-color:inherit;
 }
 #avaaLuonti {
-    font-family: monospace;
     padding:0;
     margin:0;
-    line-height:32px;
-    height:32px;
-    width:32px;
+    height:16px;
+    width:16px;
+    margin-top:7px;
     cursor: pointer;
-    font-size: 1.1em;
     border:none;
     background-color:inherit;
 }
 #avaaInfo {
-    font-family: monospace;
     padding:0;
     margin:0;
-    line-height:32px;
-    height:32px;
-    width:32px;
+    height:17px;
+    width:17px;
+    margin-top:7px;
     cursor: pointer;
-    font-size: 1.7em;
     border:none;
     background-color:inherit;
 }
 #avaaProfiili {
-    font-family: monospace;
     padding:0;
     margin:0;
-    line-height:32px;
-    height:32px;
-    width:32px;
+    height:16px;
+    width:16px;
+    margin-top:7px;
     cursor: pointer;
-    font-size: 1.1em;
     border:none;
     background-color:inherit;
 }
@@ -649,4 +641,8 @@ h5 {
     border:none;
     border-radius: 3px;
     color:rgb(143, 11, 11);
+}
+#infokuva {
+    height:15px;
+    width:15px;
 }
