@@ -23,13 +23,13 @@
 
         <div id="kirjautuminen">
             <h1 id="etusivuteksti">Kimppis</h1>
-            <h4>-Tie perille löytyy täältä!-</h4>
+            <h4 style="color:black">-Tie perille löytyy täältä!-</h4>
             <input type="text" placeholder="Käyttäjätunnus" id="kayttajanimi"> <input type="text" placeholder="Salasana" id="salasana">
 
-            <h2 id="kirjaudulinkki" onclick="kirjaudu(), kartta.invalidateSize(), kartta.setView(L.latLng(63.34,25.98), 6)">Kirjaudu sisään</h2>
+            <button id="kirjaudulinkki" onclick="kirjaudu(), kartta.invalidateSize(), kartta.setView(L.latLng(63.34,25.98), 6)">Kirjaudu</button>
+            <h2 id="jatkalinkki" onclick="suljeTausta(), kartta.invalidateSize(), kartta.setView(L.latLng(63.34,25.98), 6)">Jatka kirjautumatta</h2>
         </div>
-        <h2 id="jatkalinkki" onclick="suljeTausta(), kartta.invalidateSize(), kartta.setView(L.latLng(63.34,25.98), 6)">Jatka kirjautumatta &rarr;</h2>
-        <br>
+        
     </div>
 
 
