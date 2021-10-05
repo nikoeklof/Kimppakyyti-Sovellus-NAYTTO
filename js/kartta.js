@@ -167,12 +167,19 @@ function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara, lahtoAika, yhteyst
     var tunnitlahtoAika = parseInt(lahtoAika.slice(0, 2));
     var minuutitlahtoAika = parseInt(lahtoAika.slice(3));
     var minuuttiCheck;
+    var tuntiCheck;
 
-    if (paivamaara >= tanaan && tunnit < tunnitlahtoAika) {
+    if (paivamaara > tanaan) {
         minuuttiCheck = 1;
+        tuntiCheck = 1;
     }
-    if (paivamaara >= tanaan && tunnit === tunnitlahtoAika && minuutit < minuutitlahtoAika) {
+    if (paivamaara === tanaan && tunnit < tunnitlahtoAika) {
         minuuttiCheck = 1;
+        tuntiCheck = 1;
+    }
+    if (paivamaara === tanaan && tunnit === tunnitlahtoAika && minuutit < minuutitlahtoAika) {
+        minuuttiCheck = 1;
+        tuntiCheck = 1;
     }
     if (paivamaara === tanaan && tunnit >= tunnitlahtoAika && minuutit >= minuutitlahtoAika) {
         document.getElementById("kyytierror").innerHTML = "Tarkista lähtöaika!";
@@ -195,8 +202,9 @@ function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara, lahtoAika, yhteyst
     setTimeout(() => { document.getElementById("kyytierror").innerText = "" }, 2000)
 
 
-    if (paivamaara >= tanaan && tunnitlahtoAika >= tunnit && minuuttiCheck === 1 && kayttajanimi != undefined && lahto != "" & maaranpaa != "") {
+    if (paivamaara >= tanaan && tuntiCheck === 1 && minuuttiCheck === 1 && kayttajanimi != undefined && lahto != "" & maaranpaa != "") {
         minuuttiCheck = 0;
+        tuntiCheck = 0;
         document.getElementById("kyytierror").innerHTML = "";
 
         httpRequestlahto.onload = () => {
