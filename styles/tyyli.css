@@ -11,7 +11,7 @@ html,body {
     margin:0;
     padding:0;
     height:100%;
-    background-color: rgb(255, 1, 1);
+    background-color: rgb(49, 49, 49);
 }
 #fullscreenkuva{
     display: none;
@@ -59,7 +59,7 @@ h4 {
     margin:0;
     margin-top: 50px;
     font-size: 5em;
-    text-shadow: 10px 5px black, 5px 10px rgb(49, 49, 49);
+    text-shadow: 10px 5px black, 5px 10px rgb(49, 49, 49),0px -1px black;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -84,26 +84,30 @@ h4 {
 
 #jatkalinkki {
   cursor: pointer;
-  color:rgb(255, 255, 255);
-  position: absolute;
-  font-size: 1.3em;
+  color:rgb(0, 0, 0);
+  margin-top: 50px;
+  font-size: 0.8em;
   letter-spacing: 1.7px;
-  bottom:20px;
-  right:65px;
-  text-shadow: 4px 4px black, -2px -2px rgb(49, 49, 49);
+
 }
 #jatkalinkki:hover {
     cursor: pointer;
     color: yellow;
 }
 #kirjaudulinkki {
+    font-family: 'Lobster', cursive;
+    color:rgb(255, 255, 255);
+    background-color: rgb(49, 49, 49);
+    border: none;
     text-align: center;
     margin-right: 5px;
+    width:204px;
     cursor: pointer;
-    color:rgb(255, 255, 255);  
     font-size: 1.5em;
+    border-radius: 5px;
     letter-spacing: 2px;
-    text-shadow: 4px 4px black, -2px -2px rgb(49, 49, 49);
+    margin-top: 10px;
+    border:1px solid black;
 }
 #kirjaudulinkki:hover {
       cursor: pointer;
@@ -112,20 +116,25 @@ h4 {
 #kirjautuminen {
     text-align: center;
     width:300px;
-    background-color:rgb(49, 49, 49,0.5);
-    border-radius: 10px;
+    background-color:rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
     -webkit-box-shadow: 0px 0px 16px 2px rgba(49,49,49,1);
     -moz-box-shadow: 0px 0px 16px 2px rgba(49,49,49,1);
     box-shadow: 0px 0px 16px 2px rgba(49,49,49,1);
 }
 #kirjautuminen input {
+    border-top: none;
+    border-left:none;
+    border-right:none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     font-weight: bold;
     font-size: 1em;
-    background-color: rgb(49, 49, 49,0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color:white;
     width:200px;
     margin-top:10px;
     height:40px;
-    border-radius: 10px;
 }
 #kirjautuminenError {
     display:none;
@@ -226,7 +235,7 @@ h4 {
     width:180px;
 }
 
-#viesti {
+textarea {
     background-color: rgb(49, 49, 49,0.2);
     border-radius: 4px;
     font-family:'Mulish', sans-serif;
@@ -281,7 +290,7 @@ h4 {
     font-size: 0.8em;
     margin:0px;
     margin-top:10px;
-    margin-left:35px;
+    margin-left:50px;
     margin-bottom: 10px;
     padding-right:30px;
 }
@@ -358,50 +367,42 @@ h4 {
 }
 
 #avaaHaku {
-    font-family: monospace;
     padding:0;
     margin:0;
-    line-height:32px;
-    height:32px;
-    width:32px;
+    height:16px;
+    width:16px;
+    margin-top:7px;
     cursor: pointer;
-    font-size: 1.1em;
     border:none;
     background-color:inherit;
 }
 #avaaLuonti {
-    font-family: monospace;
     padding:0;
     margin:0;
-    line-height:32px;
-    height:32px;
-    width:32px;
+    height:16px;
+    width:16px;
+    margin-top:7px;
     cursor: pointer;
-    font-size: 1.1em;
     border:none;
     background-color:inherit;
 }
 #avaaInfo {
-    font-family: monospace;
     padding:0;
     margin:0;
-    line-height:32px;
-    height:32px;
-    width:32px;
+    height:17px;
+    width:17px;
+    margin-top:7px;
     cursor: pointer;
-    font-size: 1.7em;
     border:none;
     background-color:inherit;
 }
 #avaaProfiili {
-    font-family: monospace;
     padding:0;
     margin:0;
-    line-height:32px;
-    height:32px;
-    width:32px;
+    height:16px;
+    width:16px;
+    margin-top:7px;
     cursor: pointer;
-    font-size: 1.1em;
     border:none;
     background-color:inherit;
 }
@@ -649,4 +650,8 @@ h5 {
     border:none;
     border-radius: 3px;
     color:rgb(143, 11, 11);
+}
+#infokuva {
+    height:15px;
+    width:15px;
 }
