@@ -25,7 +25,7 @@ window.onload = () => {
     if (localStorage.getItem("tallennetutReitit") != null) {
         reittiJSON = JSON.parse(localStorage.getItem("tallennetutReitit"))
         console.log(reittiJSON)
-        // lataaKyydit()
+        lataaKyydit()
     }
     naytaKoordinaatit()
 }
@@ -64,7 +64,10 @@ function naytaKaikkiKyydit() {
 }
 
 function lataaKyydit() {
-    reittiID = reittiJSON.length
+    if(reittiJSON.length > 0){
+        reittiID = reittiJSON.length
+    }
+    
     for (let i = 0; i < reittiJSON.length; i++) {
         setTimeout(() => {
             reitti.push({
