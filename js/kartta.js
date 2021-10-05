@@ -25,7 +25,7 @@ window.onload = () => {
     if (localStorage.getItem("tallennetutReitit") != null) {
         reittiJSON = JSON.parse(localStorage.getItem("tallennetutReitit"))
         console.log(reittiJSON)
-        // lataaKyydit()
+        lataaKyydit()
     }
     naytaKoordinaatit()
 }
