@@ -3,6 +3,7 @@ var kayttajaLon;
 var reitti = [];
 var reittiJSON = []
 var reittiID;
+var kirjautunut = document.getElementById("kirjautunutkayttaja").innerHTML;
 
 var kartta = L.map('kartta', {
     center: [0, 0],
@@ -27,7 +28,6 @@ window.onload = () => {
         lataaKyydit()
     }
     naytaKoordinaatit()
-
 }
 
 function haeKyydit() {
@@ -50,6 +50,7 @@ function haeKyydit() {
     }
 }
 
+
 function naytaKaikkiKyydit() {
     for (let i = 0; i < reitti.length; i++) {
         reitti[i].router.remove()
@@ -70,6 +71,7 @@ function lataaKyydit() {
                 id: reittiJSON[i].id,
                 paivamaara: reittiJSON[i].paivamaara,
                 lahtoaika: reittiJSON[i].lahtoaika,
+                kayttajanimi: reittiJSON[i].kayttajanimi,
                 lahto: reittiJSON[i].lahto,
                 maaranpaa: reittiJSON[i].maaranpaa,
                 yhteystieto: reittiJSON[i].yhteystieto,
@@ -86,7 +88,7 @@ function lataaKyydit() {
                     },
                     createMarker: function(x, wp, nWps) {
                         return L.marker(wp.latLng).bindPopup(
-                            '<div id="markerpopup"><button id="poistareittinappula" onclick="poistaReitti(' + i + ')">Poista kyyti</button>' +
+                            '<div id="markerpopup"><button class="poistareittinappula" id="poistareittibutton' + i + '" onclick="poistaReitti(' + i + ')">Poista kyyti</button>' +
                             '<h5>Reitin tiedot</h5>' +
                             '<span id="popupteksti">LÄHTÖPAIKKA JA -AIKA: </span><p><span id="isompitekstipopup">' + reittiJSON[i].lahto + '</span>' +
                             '<p>' + reittiJSON[i].paivamaara.split("-")[2] + '.' + reittiJSON[i].paivamaara.split("-")[1] + '.' + reittiJSON[i].paivamaara.split("-")[0] + " klo: " + reittiJSON[i].lahtoaika +
@@ -103,10 +105,20 @@ function lataaKyydit() {
                             if (!reitti[thisID].valittu) {
                                 reitti[thisID].router._line.getLayers()[reitti[thisID].router._line.getLayers().length - 1]._path.setAttribute("stroke", "green")
                                 reitti[thisID].valittu = true
+                                if (reitti[thisID].kayttajanimi != kirjautunut) {
+                                    document.getElementById('poistareittibutton' + thisID).style.display = "none"
+                                } else {
+                                    document.getElementById('poistareittibutton' + thisID).style.display = "block"
+                                }
                             } else {
                                 reitti[thisID].router._line.getLayers()[reitti[thisID].router._line.getLayers().length - 1]._path.setAttribute("stroke", "red")
-
+                                if (reitti[thisID].kayttajanimi != kirjautunut) {
+                                    document.getElementById('poistareittibutton' + thisID).style.display = "none"
+                                } else {
+                                    document.getElementById('poistareittibutton' + thisID).style.display = "block"
+                                }
                             }
+
 
                         })
                     }
@@ -252,7 +264,7 @@ function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAi
             createMarker: function(i = 0, wp, nWps) {
                 let thisID = reittiID
                 return marker = L.marker(wp.latLng).bindPopup(
-                    '<div id="markerpopup"><button id="poistareittinappula" onclick="poistaReitti(' + reittiID + ')">Poista kyyti</button>' +
+                    '<div id="markerpopup"><button class="poistareittinappula" id="poistareittibutton' + reittiID + '" onclick="poistaReitti(' + reittiID + ')">Poista kyyti</button>' +
                     '<h5>Reitin tiedot</h5>' +
                     '<span id="popupteksti">LÄHTÖPAIKKA JA -AIKA: </span><p><span id="isompitekstipopup">' + lahto[0].display_name.split(",")[0] + '</span>' +
                     '<p>' + paivamaara.split("-")[2] + '.' + paivamaara.split("-")[1] + '.' + paivamaara.split("-")[0] + " klo: " + lahtoAika +
@@ -271,9 +283,12 @@ function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAi
                         reitti[thisID].valittu = true
                     } else {
                         reitti[thisID].router._line.getLayers()[reitti[thisID].router._line.getLayers().length - 1]._path.setAttribute("stroke", "red")
-
                     }
-
+                    if (reitti[thisID].kayttajanimi != kirjautunut) {
+                        document.getElementById('poistareittibutton' + thisID).style.display = "none"
+                    } else {
+                        document.getElementById('poistareittibutton' + thisID).style.display = "block"
+                    }
                 });
             }
 
@@ -325,7 +340,7 @@ function tallennaReitit() {
                 reittiJSON.push(Reittistring)
             }
         }
-    }else{
+    } else {
         localStorage.removeItem('tallennetutReitit')
         reittiJSON = []
         return
