@@ -254,9 +254,9 @@ function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAi
                 styles: [{ color: "red", opacity: 0.7, weight: 4 }],
             },
             createMarker: function(i = 0, wp, nWps) {
-                let thisID = reitti.length
+                let thisID = reittiID
                 return marker = L.marker(wp.latLng).bindPopup(
-                    '<div id="markerpopup"><button class="poistareittinappula" id="poistareittibutton' + i + '" onclick="poistaReitti(' + reittiID + ')">Poista kyyti</button>' +
+                    '<div id="markerpopup"><button class="poistareittinappula" id="poistareittibutton' + reittiID + '" onclick="poistaReitti(' + reittiID + ')">Poista kyyti</button>' +
                     '<h5>Reitin tiedot</h5>' +
                     '<span id="popupteksti">LÄHTÖPAIKKA JA -AIKA: </span><p><span id="isompitekstipopup">' + lahto[0].display_name.split(",")[0] + '</span>' +
                     '<p>' + paivamaara.split("-")[2] + '.' + paivamaara.split("-")[1] + '.' + paivamaara.split("-")[0] + " klo: " + lahtoAika +
