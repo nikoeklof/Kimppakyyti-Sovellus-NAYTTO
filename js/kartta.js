@@ -64,7 +64,10 @@ function naytaKaikkiKyydit() {
 }
 
 function lataaKyydit() {
-    reittiID = reittiJSON.length
+    if (reittiJSON.length > 0) {
+        reittiID = reittiJSON.length
+    }
+
     for (let i = 0; i < reittiJSON.length; i++) {
         setTimeout(() => {
             reitti.push({
@@ -105,20 +108,16 @@ function lataaKyydit() {
                             if (!reitti[thisID].valittu) {
                                 reitti[thisID].router._line.getLayers()[reitti[thisID].router._line.getLayers().length - 1]._path.setAttribute("stroke", "green")
                                 reitti[thisID].valittu = true
-                                if (reitti[thisID].kayttajanimi != kirjautunut) {
-                                    document.getElementById('poistareittibutton' + thisID).style.display = "none"
-                                } else {
-                                    document.getElementById('poistareittibutton' + thisID).style.display = "block"
-                                }
+
                             } else {
                                 reitti[thisID].router._line.getLayers()[reitti[thisID].router._line.getLayers().length - 1]._path.setAttribute("stroke", "red")
-                                if (reitti[thisID].kayttajanimi != kirjautunut) {
-                                    document.getElementById('poistareittibutton' + thisID).style.display = "none"
-                                } else {
-                                    document.getElementById('poistareittibutton' + thisID).style.display = "block"
-                                }
-                            }
 
+                            }
+                            if (reitti[thisID].kayttajanimi != kirjautunut || kirjautunut == 'Ylläpitäjä') {
+                                document.getElementById('poistareittibutton' + thisID).style.display = "none"
+                            } else {
+                                document.getElementById('poistareittibutton' + thisID).style.display = "block"
+                            }
 
                         })
                     }
@@ -284,7 +283,7 @@ function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAi
                     } else {
                         reitti[thisID].router._line.getLayers()[reitti[thisID].router._line.getLayers().length - 1]._path.setAttribute("stroke", "red")
                     }
-                    if (reitti[thisID].kayttajanimi != kirjautunut) {
+                    if (reitti[thisID].kayttajanimi != kirjautunut || kirjautunut == 'Ylläpitäjä') {
                         document.getElementById('poistareittibutton' + thisID).style.display = "none"
                     } else {
                         document.getElementById('poistareittibutton' + thisID).style.display = "block"
@@ -322,29 +321,29 @@ function paivitaReittiID() {
 
 
 function tallennaReitit() {
-    if (reitti.length != 0) {
-        for (let i = 0; i < reitti.length; i++) {
-            if (reitti[i] != undefined) {
-                var Reittistring = {
-                    id: reitti[i].id,
-                    kayttajanimi: reitti[i].kayttajanimi,
-                    paivamaara: reitti[i].paivamaara,
-                    lahtoaika: reitti[i].lahtoaika,
-                    lahto: reitti[i].lahto,
-                    maaranpaa: reitti[i].maaranpaa,
-                    yhteystieto: reitti[i].yhteystieto,
-                    lisaTiedot: reitti[i].lisaTiedot,
-                    routerWaypoints: [reitti[i].router.getWaypoints()[0].latLng, reitti[i].router.getWaypoints()[1].latLng],
+    localStorage.removeItem('tallennetutReitit')
+    reittiJSON = []
 
-                }
-                reittiJSON.push(Reittistring)
+    for (let i = 0; i < reitti.length; i++) {
+        if (reitti[i] != undefined) {
+            var Reittistring = {
+                id: reitti[i].id,
+                kayttajanimi: reitti[i].kayttajanimi,
+                paivamaara: reitti[i].paivamaara,
+                lahtoaika: reitti[i].lahtoaika,
+                lahto: reitti[i].lahto,
+                maaranpaa: reitti[i].maaranpaa,
+                yhteystieto: reitti[i].yhteystieto,
+                lisaTiedot: reitti[i].lisaTiedot,
+                routerWaypoints: [reitti[i].router.getWaypoints()[0].latLng, reitti[i].router.getWaypoints()[1].latLng],
+
             }
+            reittiJSON.push(Reittistring)
         }
-    } else {
-        localStorage.removeItem('tallennetutReitit')
-        reittiJSON = []
-        return
     }
+
+
+
 
 
     localStorage.setItem('tallennetutReitit', JSON.stringify(reittiJSON))
