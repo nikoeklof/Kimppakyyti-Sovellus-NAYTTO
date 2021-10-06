@@ -24,7 +24,6 @@ window.onload = () => {
 
     if (localStorage.getItem("tallennetutReitit") != null) {
         reittiJSON = JSON.parse(localStorage.getItem("tallennetutReitit"))
-        console.log(reittiJSON)
         lataaKyydit()
     }
     naytaKoordinaatit()
@@ -151,18 +150,13 @@ function luoKartta(lat, lon, zoom) {
     }).addTo(kartta)
 
 }
-kartta.on('click', (e) => {
 
-    var klikkicoordinaatit = kartta.mouseEventToLatLng(e.originalEvent)
-    console.log(klikkicoordinaatit.lat, klikkicoordinaatit.lng)
-})
 
 function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara, lahtoAika, yhteystieto, viesti) {
     var jsonDatalahto;
     var jsonDatamaaranpaa;
     let koordinaatit = [];
     var httpRequestlahto = new XMLHttpRequest()
-    console.log("eka")
     let tanaan = new Date().toISOString().slice(0, 10);
     let kellonaika = new Date().toLocaleTimeString('en-US', { hour12: false, hour: "numeric", minute: "numeric" });
     var tunnit = parseInt(kellonaika.slice(0, 2));
@@ -212,7 +206,6 @@ function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara, lahtoAika, yhteyst
 
         httpRequestlahto.onload = () => {
             jsonDatalahto = JSON.parse(httpRequestlahto.responseText);
-            console.log(jsonDatalahto)
             koordinaatit.push({ lat: jsonDatalahto[0].lat, lng: jsonDatalahto[0].lon })
 
         }
@@ -220,7 +213,6 @@ function luoKyyti(lahto, maaranpaa, kayttajanimi, paivamaara, lahtoAika, yhteyst
         httpRequestlahto.open('GET', 'https://nominatim.openstreetmap.org/search?city=' + lahto + '&format=json')
         httpRequestlahto.send()
         setTimeout(() => {
-            console.log("toka")
             var httpRequestmaaranpaa = new XMLHttpRequest();
             httpRequestmaaranpaa.onload = () => {
                 jsonDatamaaranpaa = JSON.parse(httpRequestmaaranpaa.responseText);
@@ -295,7 +287,6 @@ function luoReitti(lahto, maaranpaa, reittiID, kayttajanimi, paivamaara, lahtoAi
     });
 
 
-    console.log(reitti[reittiID]);
     paivitaReittiID();
 
 }
